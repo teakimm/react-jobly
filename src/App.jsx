@@ -1,9 +1,6 @@
-import { useState } from 'react';
 import { BrowserRouter } from "react-router-dom";
 import RoutesList from './RoutesList';
 import NavBar from './NavBar';
-
-
 
 /** Component for entire page.
  *
@@ -13,8 +10,6 @@ import NavBar from './NavBar';
 */
 
 function App() {
-
-
   return (
     <div className="App">
       <BrowserRouter>

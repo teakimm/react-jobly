@@ -6,6 +6,14 @@ import CompanyDetails from "./CompanyDetails";
 import JobsPage from "./JobsPage";
 import NotFound from "./NotFound";
 
+
+/** Component for defining routes
+ *
+ * State: None
+ * Props: None
+ *
+ * App -> RoutesList -> HomePage, CompaniesPage, CompanyDetails, JobsPage, NotFound
+ */
 function RoutesList() {
     return (
         <Routes>

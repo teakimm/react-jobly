@@ -1,3 +1,11 @@
+
+/** Component for 404 page
+ *
+ * State: None
+ * Props: None
+ *
+ * RoutesList -> NotFound
+ */
 function NotFound() {
     return (
         <div>
