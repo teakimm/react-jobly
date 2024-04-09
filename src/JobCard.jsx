@@ -2,17 +2,19 @@
 /** Presentational component for displaying job
  *
  * State: None
- * Props: job like {salary, title, equity, companyName}
+ * Props: job like {id, salary, title, equity, companyName, companyHandle}
  *
  * JobsList -> JobCard
 */
 function JobCard({ job }) {
-    // TODO: write return statement
-    return <div>
-        <p>Information Officer</p>
-        <p>Apple</p>
-        <p>$1,000,000</p>
-    </div>;
+    return (
+        <div className="JobCard">
+            <h3>{job.title}</h3>
+            <h4>{job.companyName}</h4>
+            <h5>Salary: {job.salary ? `$${job.salary}` : "unknown"}</h5>
+            <h5>Equity: {job.equity || "unknown"}</h5>
+        </div>
+    );
 }
 
 export default JobCard;

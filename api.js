@@ -1,5 +1,5 @@
-const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
-
+const BASE_URL = "http://localhost:3001";
+//process.env.REACT_APP_BASE_URL ||
 /** API Class.
  *
  * Static class tying together methods used to get/send to the API.
@@ -53,6 +53,11 @@ class JoblyApi {
   }
 
   // obviously, you'll add a lot here ...
+
+  static async getJobs() {
+    let res = await this.request(`jobs/`);
+    return res.jobs;
+  }
 }
 
 export default JoblyApi;

@@ -3,7 +3,7 @@ import JobCard from "./JobCard";
 /** Presentational component for displaying jobs list
  *
  * State: None
- * Props: jobs like [{id, salary, title, equity, companyName}, ...]
+ * Props: jobs like [{id, salary, title, equity, companyName, companyHandle}, ...]
  *
  * JobsPage, CompanyDetails -> JobsList -> JobCard
 */
