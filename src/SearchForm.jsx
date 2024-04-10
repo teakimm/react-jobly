@@ -8,8 +8,8 @@ import { useState } from "react";
  *
  * JobsPage, CompaniesPage -> SearchForm
 */
-function SearchForm({ handleSearch }) {
-    const [userInput, setUserInput] = useState("");
+function SearchForm({ initialInput = "", handleSearch }) {
+    const [userInput, setUserInput] = useState(initialInput);
 
     function handleChange(evt) {
         setUserInput(evt.target.value);

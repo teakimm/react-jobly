@@ -50,7 +50,7 @@ function JobsPage() {
 
     return (
         <div>
-            <SearchForm handleSearch={handleSearch} />
+            <SearchForm initialInput={searchFilter} handleSearch={handleSearch} />
             {searchFilter
                 ? <h1>Search Results for: {searchFilter}</h1>
                 : <h1>All Jobs</h1>}
