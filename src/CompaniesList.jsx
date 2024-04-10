@@ -4,14 +4,14 @@ import CompanyCard from "./CompanyCard";
 /** Presentational component for displaying jobs list
  *
  * State: None
- * Props: companies like [{code, name, description, jobs, logo}, ...]
+ * Props: companies like [{handle, name, description, logo}, ...]
  *
  * JobsPage, CompanyDetails -> JobsList -> JobCard
 */
-function CompanyList({ companies }) {
+function CompaniesList({ companies }) {
 
     function renderCompanies() {
-        return companies.map(company => <CompanyCard key={jcompany.id} company={company} />);
+        return companies.map(company => <CompanyCard key={company.handle} company={company} />);
     }
 
     return (
@@ -21,4 +21,4 @@ function CompanyList({ companies }) {
     );
 }
 
-export default CompanyList;
+export default CompaniesList;

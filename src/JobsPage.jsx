@@ -6,13 +6,13 @@ import SearchForm from "./SearchForm";
 /** smart component to render jobs
  *
  * state:
- * jobs - list of jobs like: [{{id, salary, title, equity, ...}, ...]
+ * jobs - list of jobs like: [{id, salary, title, equity, ...}, ...]
  * isLoading - boolean representing status of api call
  * searchFilter - string representing users input to search bar
  *
  * props: none
  *
- * RouteList -> JobsPage -> JobList, SearchForm -> JobCard
+ * RouteList -> JobsPage -> JobsList, SearchForm -> JobCard
  */
 function JobsPage() {
     const [jobs, setJobs] = useState([]);
@@ -29,7 +29,8 @@ function JobsPage() {
         fetchJobs();
     }, []);
 
-    function handleSearch(userInput) {
+    function search(userInput) {
+        userInput = userInput.trim();
         setIsLoading(true);
         if (!userInput) {
             setSearchFilter("");
@@ -50,11 +51,14 @@ function JobsPage() {
 
     return (
         <div>
-            <SearchForm initialInput={searchFilter} handleSearch={handleSearch} />
+            <SearchForm initialInput={searchFilter} search={search} />
             {searchFilter
                 ? <h1>Search Results for: {searchFilter}</h1>
                 : <h1>All Jobs</h1>}
-            <JobsList jobs={jobs} />
+            {jobs.length > 0
+                ? <JobsList jobs={jobs} />
+                : "Sorry, no results were found!"}
+
         </div>
     );
 }

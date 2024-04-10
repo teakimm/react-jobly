@@ -7,11 +7,12 @@
  * CompanyList -> CompanyCard
 */
 function CompanyCard({ company }) {
-    // TODO: write the return statement
     return (
         <div>
-            <p>Apple</p>
-            <p>Tech company</p>
+            <h3>{company.name}</h3>
+            <h4>{company.description}</h4>
+            <h5>{company.numEmployees}</h5>
+            {company.logoUrl && <img src={company.logoUrl} alt={`Logo for ${company.name}`} />}
         </div>
     );
 }

@@ -8,7 +8,7 @@ import { useState } from "react";
  *
  * JobsPage, CompaniesPage -> SearchForm
 */
-function SearchForm({ initialInput = "", handleSearch }) { //TODO: consider a more clear name
+function SearchForm({ initialInput = "", search }) {
     const [userInput, setUserInput] = useState(initialInput);
 
     function handleChange(evt) {
@@ -17,7 +17,7 @@ function SearchForm({ initialInput = "", handleSearch }) { //TODO: consider a mo
 
     function handleSubmit(evt) {
         evt.preventDefault();
-        handleSearch(userInput);
+        search(userInput);
     }
 
     return (<div>
