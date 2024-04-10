@@ -24,6 +24,7 @@ function CompaniesPage() {
         setIsLoading(false);
     }
 
+
     useEffect(function fetchCompaniesWhenMounted() {
         fetchCompanies();
     }, []);

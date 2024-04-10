@@ -1,6 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import RoutesList from './RoutesList';
 import NavBar from './NavBar';
+import userContext from "./userContext";
 
 /** Component for entire page.
  *
@@ -11,12 +12,12 @@ import NavBar from './NavBar';
 
 function App() {
   return (
-    <div className="App">
+    <userContext.Provider value={{ user: null }}>
       <BrowserRouter>
         <NavBar />
         <RoutesList />
       </BrowserRouter>
-    </div>
+    </userContext.Provider>
   );
 };
 
