@@ -1,7 +1,6 @@
-import { useContext, useState } from "react";
-import userContext from "./userContext";
+import { useState } from "react";
 
-const initialFormData = {
+const INITIAL_FORM_DATA = {
     username: "",
     password: "",
     firstName: "",
@@ -9,9 +8,9 @@ const initialFormData = {
     email: ""
 };
 
-
+/** TODO: */
 function RegisterPage({ register }) {
-    const [formData, setFormData] = useState(initialFormData);
+    const [formData, setFormData] = useState(INITIAL_FORM_DATA);
 
     function handleChange(evt) {
         const { name, value } = evt.target;

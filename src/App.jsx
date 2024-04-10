@@ -19,7 +19,7 @@ function App() {
   useEffect(function updateUserInfoOnTokenChange() {
     async function updateUserInfo() {
       if (currUser?.username && token) {
-        const user = await JoblyApi.getUser(currUser.username, token);
+        const user = await JoblyApi.getUser(currUser.username);
         setCurrUser(user);
       } else {
         setCurrUser(null);
@@ -31,6 +31,7 @@ function App() {
   /** Takes in loginData like {username: ..., password: ...} */
   async function login(loginData) {
     const token = await JoblyApi.login(loginData.username, loginData.password);
+    JoblyApi.token = token;
     setCurrUser({ username: loginData.username });
     setToken(token);
   }
@@ -41,6 +42,7 @@ function App() {
 
   async function register(registerData) {
     const token = await JoblyApi.register(registerData);
+    JoblyApi.token = token;
     setCurrUser({ username: registerData.username });
     setToken(token);
   }
@@ -51,7 +53,7 @@ function App() {
   return (
     <userContext.Provider value={{ currUser, token }}>
       <BrowserRouter>
-        <NavBar />
+        <NavBar logout={logout} />
         <RoutesList login={login} register={register} />
       </BrowserRouter>
     </userContext.Provider>
