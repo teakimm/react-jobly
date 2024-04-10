@@ -12,14 +12,14 @@ class JoblyApi {
   // Remember, the backend needs to be authorized with a token
   // We're providing a token you can use to interact with the backend API
   // DON'T MODIFY THIS TOKEN
-  static token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  // static token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
+  //   "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
+  //   "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
-  static async request(endpoint, data = {}, method = "GET") {
+  static async request({ endpoint, token, data = {}, method = "GET" }) {
     const url = new URL(`${BASE_URL}/${endpoint}`);
     const headers = {
-      authorization: `Bearer ${JoblyApi.token}`,
+      authorization: `Bearer ${token}`,
       'content-type': 'application/json',
     };
 
@@ -64,6 +64,36 @@ class JoblyApi {
     let res = await this.request(`jobs`, searchData);
     return res.jobs;
   }
+
+  /** Login, returns token */
+  static async login(username, password) {
+    let res = await this.request({
+      endpoint: `auth/token`,
+      data: { username, password },
+      method: "POST"
+    });
+    return res.token;
+  }
+
+  static async register(registerData) {
+    let res = await this.request({
+      endpoint: `auth/register`,
+      data: registerData,
+      method: "POST"
+    });
+    return res.token;
+  }
+
+  /** Gets user */
+  static async getUser(username, token) {
+    let res = await this.request({
+      endpoint: `users/${username}`,
+      token: token,
+      method: "POST"
+    });
+    return res.user;
+  }
+
 
 }
 
