@@ -10,6 +10,7 @@ import userContext from "./userContext";
  * App -> NavBar
  */
 function NavBar() {
+
     return (
 
         <nav className="navbar navbar-expand-lg navbar-light bg-dark">
