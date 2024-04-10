@@ -17,7 +17,8 @@ function SearchForm({ initialInput = "", search }) {
 
     function handleSubmit(evt) {
         evt.preventDefault();
-        search(userInput);
+        setUserInput(userInput.trim());
+        search(userInput.trim());
     }
 
     return (<div>

@@ -65,10 +65,17 @@ class JoblyApi {
 
   /** Get jobs by query parameter */
   static async filterJobs(searchParam) {
-    const qs = new URLSearchParams({ title: searchParam });
     let res = await this.request(`jobs`, { title: searchParam });
     return res.jobs;
   }
+
+  /** Get companies by query parameter */
+  static async filterCompanies(searchParam) {
+    let res = await this.request(`companies`, { nameLike: searchParam });
+    return res.companies;
+  }
+
+
 }
 
 export default JoblyApi;

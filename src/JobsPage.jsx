@@ -30,7 +30,6 @@ function JobsPage() {
     }, []);
 
     function search(userInput) {
-        userInput = userInput.trim();
         setIsLoading(true);
         if (!userInput) {
             setSearchFilter("");
@@ -47,7 +46,11 @@ function JobsPage() {
         }
     }
 
-    if (isLoading) return <h1>Loading...</h1>;
+    function renderJobs() {
+        return (jobs && jobs.length > 0)
+            ? <JobsList jobs={jobs} />
+            : "Sorry, no results were found!";
+    }
 
     return (
         <div>
@@ -55,10 +58,9 @@ function JobsPage() {
             {searchFilter
                 ? <h1>Search Results for: {searchFilter}</h1>
                 : <h1>All Jobs</h1>}
-            {jobs.length > 0
-                ? <JobsList jobs={jobs} />
-                : "Sorry, no results were found!"}
-
+            {isLoading
+                ? <h1>Loading...</h1>
+                : <div> {renderJobs()} </div>}
         </div>
     );
 }

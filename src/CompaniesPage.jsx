@@ -19,8 +19,8 @@ function CompaniesPage() {
     const [searchFilter, setSearchFilter] = useState("");
 
     async function fetchCompanies() {
-        const companyResponse = await JoblyApi.getCompanies();
-        setCompanies(companyResponse);
+        const companiesResponse = await JoblyApi.getCompanies();
+        setCompanies(companiesResponse);
         setIsLoading(false);
     }
 
@@ -28,15 +28,40 @@ function CompaniesPage() {
         fetchCompanies();
     }, []);
 
+    function search(userInput) {
+        userInput = userInput.trim();
+        // setIsLoading(true);
+        if (!userInput) {
+            setSearchFilter("");
+            fetchCompanies();
+            // setIsLoading(false);
+        } else {
+            console.log(userInput);
+            setSearchFilter(userInput);
+            async function filterCompanies() {
+                const companiesResponse = await JoblyApi.filterCompanies(userInput);
+                setCompanies(companiesResponse);
+                // setIsLoading(false);
+            }
+            filterCompanies();
+        }
+    }
 
-
-
-
-
+    function renderCompanies() {
+        return (companies && companies.length > 0)
+            ? <CompaniesList companies={companies} />
+            : "Sorry, no results were found!";
+    }
 
     return (
         <div>
-            <CompaniesList companies={companies} />
+            <SearchForm initialInput={searchFilter} search={search} />
+            {searchFilter
+                ? <h1>Search Results for: {searchFilter}</h1>
+                : <h1>All Companies</h1>}
+            {isLoading
+                ? <h1>Loading...</h1>
+                : <div> {renderCompanies()} </div>}
         </div>
     );
 }

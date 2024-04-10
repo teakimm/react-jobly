@@ -19,7 +19,7 @@ function RoutesList() {
         <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/companies" element={<CompaniesPage />} />
-            <Route path="/companies/:code" element={<CompanyDetails />} />
+            <Route path="/companies/:handle" element={<CompanyDetails />} />
             <Route path="/jobs" element={<JobsPage />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
