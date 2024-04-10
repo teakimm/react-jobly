@@ -13,41 +13,46 @@ import JoblyApi from "../api";
 */
 
 function App() {
-
   const [currUser, setCurrUser] = useState(null);
   const [token, setToken] = useState(null);
 
-  useEffect(function updateUserInfo() {
-    if (currUser?.username && token) {
-      const user = JoblyApi.getUser(currUser.username, token);
-      setCurrUser(user);
-    } else {
-      setCurrUser(null);
+  useEffect(function updateUserInfoOnTokenChange() {
+    async function updateUserInfo() {
+      if (currUser?.username && token) {
+        const user = await JoblyApi.getUser(currUser.username, token);
+        setCurrUser(user);
+      } else {
+        setCurrUser(null);
+      }
     }
-  }, [token])
+    updateUserInfo();
+  }, [token]);
 
   /** Takes in loginData like {username: ..., password: ...} */
   async function login(loginData) {
     const token = await JoblyApi.login(loginData.username, loginData.password);
-    setCurrUser({username: loginData.username})
+    setCurrUser({ username: loginData.username });
     setToken(token);
   }
 
   function logout() {
-    setToken(null)
+    setToken(null);
   }
 
   async function register(registerData) {
     const token = await JoblyApi.register(registerData);
-    setCurrUser({username: loginData.username})
+    setCurrUser({ username: registerData.username });
     setToken(token);
   }
 
+  console.log(currUser);
+  console.log(token);
+
   return (
-    <userContext.Provider value={{ user, token }}>
+    <userContext.Provider value={{ currUser, token }}>
       <BrowserRouter>
         <NavBar />
-        <RoutesList />
+        <RoutesList login={login} register={register} />
       </BrowserRouter>
     </userContext.Provider>
   );

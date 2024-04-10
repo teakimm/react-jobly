@@ -3,11 +3,14 @@ import userContext from "./userContext";
 
 const initialFormData = {
     username: "",
-    password: ""
+    password: "",
+    firstName: "",
+    lastName: "",
+    email: ""
 };
 
 
-function LoginPage({ login }) {
+function RegisterPage({ register }) {
     const [formData, setFormData] = useState(initialFormData);
 
     function handleChange(evt) {
@@ -20,7 +23,7 @@ function LoginPage({ login }) {
 
     function handleSubmit(evt) {
         evt.preventDefault();
-        login(formData);
+        register(formData);
     }
 
     return (
@@ -32,10 +35,19 @@ function LoginPage({ login }) {
                 <label htmlFor="password">Password:</label>
                 <input name="password" id="password" onChange={handleChange} value={formData.password} type="password" />
 
-                <button>Login</button>
+                <label htmlFor="firstName">First Name:</label>
+                <input name="firstName" id="firstName" onChange={handleChange} value={formData.firstName} type="text" />
+
+                <label htmlFor="lastName">Last Name:</label>
+                <input name="lastName" id="lastName" onChange={handleChange} value={formData.lastName} type="text" />
+
+                <label htmlFor="email">Email:</label>
+                <input name="email" id="email" onChange={handleChange} value={formData.email} type="email" />
+
+                <button>Register</button>
             </form>
         </div>
     );
 }
 
-export default LoginPage;
+export default RegisterPage;

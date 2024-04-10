@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import JoblyApi from "../api";
 import JobsList from "./JobsList";
 import SearchForm from "./SearchForm";
+import userContext from "./userContext";
 
 /** smart component to render jobs
  *
@@ -18,6 +19,12 @@ function JobsPage() {
     const [jobs, setJobs] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [searchFilter, setSearchFilter] = useState("");
+
+    const { currUser, token } = useContext(userContext);
+
+    console.log("currUser", currUser);
+    console.log("token", token);
+
 
     async function fetchJobs(searchParam = "") {
         const jobResponse = await JoblyApi.getJobs(searchParam);

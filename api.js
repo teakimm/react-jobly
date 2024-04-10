@@ -47,21 +47,21 @@ class JoblyApi {
 
   /** Get details on a company by handle. */
   static async getCompany(handle) {
-    let res = await this.request(`companies/${handle}`);
+    let res = await this.request({ endpoint: `companies/${handle}` });
     return res.company;
   }
 
   /** Get all companies */
   static async getCompanies(searchParam = "") {
     const searchData = searchParam ? { nameLike: searchParam } : {};
-    let res = await this.request(`companies`, searchData);
+    let res = await this.request({ endpoint: `companies`, data: searchData });
     return res.companies;
   }
 
   /** Get all jobs */
   static async getJobs(searchParam = "") {
     const searchData = searchParam ? { title: searchParam } : {};
-    let res = await this.request(`jobs`, searchData);
+    let res = await this.request({ endpoint: `jobs`, data: searchData });
     return res.jobs;
   }
 
@@ -89,7 +89,7 @@ class JoblyApi {
     let res = await this.request({
       endpoint: `users/${username}`,
       token: token,
-      method: "POST"
+      method: "GET"
     });
     return res.user;
   }

@@ -2,15 +2,15 @@
 /** Component for 404 page
  *
  * State: None
- * Props: message -> string to be displayed to the user
+ * Props: None
  *
  * RoutesList -> NotFound
  */
-function NotFound({ message = "Page not found" }) {
+function NotFound() { //TODO: consider using a prop to give information to lost user
     return (
         <div>
             <h1>404</h1>
-            <h4>{message}</h4>
+            hey you're not supposed to be here right now
         </div>
     );
 }
