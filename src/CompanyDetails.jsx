@@ -2,18 +2,19 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import JoblyApi from "../api";
 import JobsList from "./JobsList";
+import NotFound from "./NotFound";
 
 /** Component for displaying company details
  *
- * Prop: none
- * State: company
+ * Props: none
+ * State: company like: {handle, name, description, numEmployees, logoUrl}
  *
  * RoutesList -> CompanyDetails -> JobList
 */
 function CompanyDetails() {
-    const { handle } = useParams();
+    const { handle } = useParams();;
 
-    const [company, setCompany] = useState({});
+    const [company, setCompany] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(function fetchCompanyWhenMounted() {
@@ -29,9 +30,14 @@ function CompanyDetails() {
 
     return (
         <div>
-            <h4>{company.name}</h4>
-            <p>{company.description}</p>
-            <JobsList jobs={company.jobs} />
+            {company
+                ? <div>
+                    <h4>{company.name}</h4>
+                    <p>{company.description}</p>
+                    <JobsList jobs={company.jobs} />
+                </div>
+                : <NotFound />}
+
         </div>
     );
 }

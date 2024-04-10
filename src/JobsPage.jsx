@@ -29,6 +29,7 @@ function JobsPage() {
         fetchJobs();
     }, []);
 
+    /** Make api request with user input and updates state on api response. */
     function search(userInput) {
         setIsLoading(true);
         if (!userInput) {

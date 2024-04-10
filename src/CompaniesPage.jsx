@@ -24,24 +24,25 @@ function CompaniesPage() {
         setIsLoading(false);
     }
 
+    //TODO: refactor getCompanies to take optional parameters
     useEffect(function fetchCompaniesWhenMounted() {
         fetchCompanies();
     }, []);
 
+    /** Make api request with user input and updates state on api response. */
     function search(userInput) {
-        userInput = userInput.trim();
-        // setIsLoading(true);
+        setIsLoading(true);
         if (!userInput) {
             setSearchFilter("");
             fetchCompanies();
-            // setIsLoading(false);
+            setIsLoading(false);
         } else {
             console.log(userInput);
             setSearchFilter(userInput);
             async function filterCompanies() {
                 const companiesResponse = await JoblyApi.filterCompanies(userInput);
                 setCompanies(companiesResponse);
-                // setIsLoading(false);
+                setIsLoading(false);
             }
             filterCompanies();
         }

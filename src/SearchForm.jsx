@@ -2,7 +2,7 @@ import { useState } from "react";
 
 /** Component for rendering search form
  *
- * State: userInput
+ * State: userInput (string)
  * Props:
  *  handleSubmit -> function to call when user submits form
  *

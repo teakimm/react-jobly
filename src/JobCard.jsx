@@ -1,4 +1,4 @@
-import "./JobCard.css"
+import "./JobCard.css";
 
 /** Presentational component for displaying job
  *
@@ -8,7 +8,7 @@ import "./JobCard.css"
  * JobsList -> JobCard
 */
 function JobCard({ job }) {
-    return (
+    return ( //TODO: format salary
         <div className="JobCard">
             <h3>{job.title}</h3>
             <h4>{job.companyName}</h4>

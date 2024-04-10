@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import "./CompanyCard.css"
+import "./CompanyCard.css";
 
 /** Presentational component for displaying company
  *
@@ -12,7 +12,7 @@ function CompanyCard({ company }) {
     const navigate = useNavigate();
 
     function handleClick() {
-        navigate(`/companies/${company.handle}`);
+        navigate(`/companies/${company.handle}`); //TODO: can use <Link/>
     }
 
     return (

@@ -9,6 +9,7 @@
 function NotFound() {
     return (
         <div>
+            <h1>404</h1>
             hey you're not supposed to be here right now
         </div>
     );
