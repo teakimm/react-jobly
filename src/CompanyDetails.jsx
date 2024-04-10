@@ -19,8 +19,12 @@ function CompanyDetails() {
 
     useEffect(function fetchCompanyWhenMounted() {
         async function fetchCompany() {
-            const companyResponse = await JoblyApi.getCompany(handle);
-            setCompany(companyResponse);
+            try {
+                const companyResponse = await JoblyApi.getCompany(handle);
+                setCompany(companyResponse);
+            } catch (err) {
+                console.error(err);
+            }
             setIsLoading(false);
         }
         fetchCompany();
@@ -36,7 +40,7 @@ function CompanyDetails() {
                     <p>{company.description}</p>
                     <JobsList jobs={company.jobs} />
                 </div>
-                : <NotFound />}
+                : <NotFound message={`No company with handle: ${handle}`} />}
 
         </div>
     );

@@ -9,15 +9,22 @@ import { NavLink } from "react-router-dom";
  */
 function NavBar() {
     return (
-        <nav>
-            <div>
-                <NavLink to="/">Jobly</NavLink>
-            </div>
-            <div>
-                <NavLink to="/companies">Companies</NavLink>
-                <NavLink to="/jobs">Jobs</NavLink>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+            <div class="container-fluid">
+
+                <NavLink className="navbar-brand text-light" to="/">Jobly</NavLink>
+
+
+                <div class="d-flex ms-auto">
+                    <NavLink className="nav-link text-light mx-3" to="/companies">Companies</NavLink>
+                    <NavLink className="nav-link text-light" to="/jobs">Jobs</NavLink>
+                </div>
+
             </div>
         </nav>
+
+
     );
 }
 

@@ -47,38 +47,23 @@ class JoblyApi {
 
   /** Get details on a company by handle. */
   static async getCompany(handle) {
-    try {
-      let res = await this.request(`companies/${handle}`);
-      return res.company;
-    } catch {
-      return null;
-    } //TODO: move try/catch to component
+    let res = await this.request(`companies/${handle}`);
+    return res.company;
   }
 
   /** Get all companies */
-  static async getCompanies() {
-    let res = await this.request(`companies/`);
+  static async getCompanies(searchParam = "") {
+    const searchData = searchParam ? { nameLike: searchParam } : {};
+    let res = await this.request(`companies`, searchData);
     return res.companies;
   }
 
   /** Get all jobs */
-  static async getJobs() {
-    let res = await this.request(`jobs/`);
+  static async getJobs(searchParam = "") {
+    const searchData = searchParam ? { title: searchParam } : {};
+    let res = await this.request(`jobs`, searchData);
     return res.jobs;
   }
-
-  /** Get jobs by query parameter */
-  static async filterJobs(searchParam) {
-    let res = await this.request(`jobs`, { title: searchParam });
-    return res.jobs;
-  }
-
-  /** Get companies by query parameter */
-  static async filterCompanies(searchParam) {
-    let res = await this.request(`companies`, { nameLike: searchParam });
-    return res.companies;
-  }
-
 
 }
 

@@ -19,8 +19,8 @@ function JobsPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [searchFilter, setSearchFilter] = useState("");
 
-    async function fetchJobs() {
-        const jobResponse = await JoblyApi.getJobs();
+    async function fetchJobs(searchParam = "") {
+        const jobResponse = await JoblyApi.getJobs(searchParam);
         setJobs(jobResponse);
         setIsLoading(false);
     }
@@ -32,19 +32,9 @@ function JobsPage() {
     /** Make api request with user input and updates state on api response. */
     function search(userInput) {
         setIsLoading(true);
-        if (!userInput) {
-            setSearchFilter("");
-            fetchJobs();
-            setIsLoading(false);
-        } else {
-            setSearchFilter(userInput);
-            async function filterJobs() {
-                const jobResponse = await JoblyApi.filterJobs(userInput);
-                setJobs(jobResponse);
-                setIsLoading(false);
-            }
-            filterJobs();
-        }
+        setSearchFilter(userInput);
+        fetchJobs(userInput);
+        setIsLoading(false);
     }
 
     function renderJobs() {

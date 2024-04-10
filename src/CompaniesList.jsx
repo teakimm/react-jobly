@@ -5,7 +5,7 @@ import CompanyCard from "./CompanyCard";
  * State: None
  * Props: companies like [{handle, name, description, logo}, ...]
  *
- * JobsPage, CompanyDetails -> JobsList -> JobCard //TODO: update this
+ * CompaniesPage -> CompaniesList -> CompanyCard
 */
 function CompaniesList({ companies }) {
 

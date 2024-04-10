@@ -18,13 +18,12 @@ function CompaniesPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [searchFilter, setSearchFilter] = useState("");
 
-    async function fetchCompanies() {
-        const companiesResponse = await JoblyApi.getCompanies();
+    async function fetchCompanies(searchParam = "") {
+        const companiesResponse = await JoblyApi.getCompanies(searchParam);
         setCompanies(companiesResponse);
         setIsLoading(false);
     }
 
-    //TODO: refactor getCompanies to take optional parameters
     useEffect(function fetchCompaniesWhenMounted() {
         fetchCompanies();
     }, []);
@@ -32,20 +31,9 @@ function CompaniesPage() {
     /** Make api request with user input and updates state on api response. */
     function search(userInput) {
         setIsLoading(true);
-        if (!userInput) {
-            setSearchFilter("");
-            fetchCompanies();
-            setIsLoading(false);
-        } else {
-            console.log(userInput);
-            setSearchFilter(userInput);
-            async function filterCompanies() {
-                const companiesResponse = await JoblyApi.filterCompanies(userInput);
-                setCompanies(companiesResponse);
-                setIsLoading(false);
-            }
-            filterCompanies();
-        }
+        setSearchFilter(userInput);
+        fetchCompanies(userInput);
+        setIsLoading(false);
     }
 
     function renderCompanies() {

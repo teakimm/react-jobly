@@ -7,7 +7,6 @@
  * RoutesList -> HomePage
 */
 function HomePage() {
-    // TODO: style this bish
     return (
         <div>
             <h1>Jobly</h1>
