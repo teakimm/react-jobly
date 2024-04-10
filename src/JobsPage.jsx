@@ -8,7 +8,7 @@ import SearchForm from "./SearchForm";
  * state:
  * jobs - list of jobs like: [{{id, salary, title, equity, ...}, ...]
  * isLoading - boolean representing status of api call
- * searchFilter - string representing users input to seach bar
+ * searchFilter - string representing users input to search bar
  *
  * props: none
  *

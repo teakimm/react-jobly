@@ -8,7 +8,7 @@ import { useState } from "react";
  *
  * JobsPage, CompaniesPage -> SearchForm
 */
-function SearchForm({ initialInput = "", handleSearch }) {
+function SearchForm({ initialInput = "", handleSearch }) { //TODO: consider a more clear name
     const [userInput, setUserInput] = useState(initialInput);
 
     function handleChange(evt) {
