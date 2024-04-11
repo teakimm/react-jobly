@@ -79,13 +79,14 @@ function App() {
     }));
   }
 
-  return (
+  return (<div className="App">
     <UserContext.Provider value={{ currUser }}>
       <BrowserRouter>
         <NavBar logout={logout} />
         {firstLoading || <RoutesList login={login} register={register} updateProfile={updateProfile} />}
       </BrowserRouter>
     </UserContext.Provider>
+  </div>
   );
 };
 

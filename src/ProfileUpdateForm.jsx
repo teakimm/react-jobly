@@ -58,21 +58,27 @@ function ProfileUpdateForm({ updateProfile }) {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username:</label>
-                <input name="username" id="username" value={currUser.username} type="text" disabled />
+        <div className="card p-4 mt-5 ProfileUpdateForm" style={{width: "25rem"}}>
+            <form className="mb-3" onSubmit={handleSubmit}>
+                <div className="mb-3">
+                    <label className="form-label" htmlFor="username">Username:</label>
+                    <input className="form-control" name="username" id="username" value={currUser.username} type="text" disabled />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label" htmlFor="firstName">First Name:</label>
+                    <input className="form-control" name="firstName" id="firstName" onChange={handleChange} value={formData.firstName} type="text" />
+                </div>
+                <div className="mb-3" >
+                    <label className="form-label" htmlFor="lastName">Last Name:</label>
+                    <input className="form-control" name="lastName" id="lastName" onChange={handleChange} value={formData.lastName} type="text" />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label" htmlFor="email">Email:</label>
+                    <input className="form-control" name="email" id="email" onChange={handleChange} value={formData.email} type="email" />
+                </div>
 
-                <label htmlFor="firstName">First Name:</label>
-                <input name="firstName" id="firstName" onChange={handleChange} value={formData.firstName} type="text" />
+                <button className="btn btn-secondary">Update</button>
 
-                <label htmlFor="lastName">Last Name:</label>
-                <input name="lastName" id="lastName" onChange={handleChange} value={formData.lastName} type="text" />
-
-                <label htmlFor="email">Email:</label>
-                <input name="email" id="email" onChange={handleChange} value={formData.email} type="email" />
-
-                <button>Update</button>
             </form>
             {alertMessages && <Alert messages={alertMessages.messages} type={alertMessages.type} />}
         </div>

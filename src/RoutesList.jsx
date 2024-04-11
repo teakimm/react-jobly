@@ -10,6 +10,7 @@ import NotFound from "./NotFound";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import ProfileUpdateForm from "./ProfileUpdateForm";
+import "./RoutesList.css"
 
 /** Component for defining routes
  *
@@ -23,7 +24,7 @@ function RoutesList({ login, register, updateProfile }) {
 
     const message = currUser ? "Page not found" : "You shouldn't be here";
 
-    return (
+    return (<div className="RoutesList">
         <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginForm login={login} />} />
@@ -38,6 +39,7 @@ function RoutesList({ login, register, updateProfile }) {
             }
             <Route path="*" element={<NotFound message={message} />} />
         </Routes>
+    </div>
     );
 }
 
