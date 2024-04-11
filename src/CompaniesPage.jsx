@@ -53,7 +53,7 @@ function CompaniesPage() {
     return (
         <div className="mt-5 offset-1 col-10">
             <SearchForm initialInput={searchFilter} search={search} />
-            <div className="mt-3" style={{color: "white"}}>
+            <div className="mt-5" style={{ color: "white" }}>
                 {searchFilter
                     ? <h1>Search Results for: {searchFilter}</h1>
                     : <h1>All Companies</h1>}

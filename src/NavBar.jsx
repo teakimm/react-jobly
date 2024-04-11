@@ -24,13 +24,13 @@ function NavBar({ logout }) {
                 <NavLink className="navbar-brand text-light" to="/">Jobly</NavLink>
 
                 {currUser
-                    ? <div className="d-flex ms-auto">
+                    ? <div className="d-flex align-items-center ms-auto">
                         <NavLink className="nav-link text-light mx-3" to="/companies">Companies</NavLink>
                         <NavLink className="nav-link text-light mx-3" to="/jobs">Jobs</NavLink>
                         <NavLink className="nav-link text-light mx-3" to="/profile">Profile</NavLink>
-                        <NavLink onClick={handleLogout} className="btn text-light mx-3" to="/">Log Out</NavLink>
+                        <NavLink onClick={handleLogout} className="btn btn-outline-light mx-3" to="/">Log Out</NavLink>
                     </div>
-                    : <div className="d-flex ms-auto">
+                    : <div className="d-flex align-items-center ms-auto">
                         <NavLink className="nav-link text-light mx-3" to="/register">Register</NavLink>
                         <NavLink className="nav-link text-light mx-3" to="/login">Log In</NavLink>
                     </div>

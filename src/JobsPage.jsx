@@ -42,7 +42,7 @@ function JobsPage() {
         setSearchFilter(userInput);
         fetchJobs(userInput);
         setIsLoading(false);
-    }
+    } //TODO: loading should be white text
 
     function renderJobs() {
         return (jobs && jobs.length > 0)
@@ -53,7 +53,7 @@ function JobsPage() {
     return (
         <div className="mt-5 offset-1 col-10">
             <SearchForm initialInput={searchFilter} search={search} />
-            <div className="mt-3" style={{color: "white"}}>
+            <div className="mt-5" style={{ color: "white" }}>
                 {searchFilter
                     ? <h1>Search Results for: {searchFilter}</h1>
                     : <h1>All Jobs</h1>}
