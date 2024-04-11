@@ -8,7 +8,7 @@
  */
 function NotFound({ message = "Page not found" }) {
     return (
-        <div>
+        <div className="card p-3">
             <h1>404</h1>
             <h4>{message}</h4>
         </div>

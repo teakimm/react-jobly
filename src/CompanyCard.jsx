@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-import "./CompanyCard.css";
 import { Link } from "react-router-dom";
 
 /** Presentational component for displaying company
@@ -11,16 +9,19 @@ import { Link } from "react-router-dom";
 */
 function CompanyCard({ company }) {
 
-    return (<div>
-        <Link to={`/companies/${company.handle}`}>
-            <div className="CompanyCard">
-                <h3>{company.name}</h3>
-                <h4>{company.description}</h4>
-                <h5>{company.numEmployees}</h5>
-                {company.logoUrl && <img src={company.logoUrl} alt={`Logo for ${company.name}`} />}
+    return (
+        <Link className="text-decoration-none" to={`/companies/${company.handle}`}>
+            <div className="CompanyCard card mt-4 p-2">
+                <div>
+                    <h2>{company.name}</h2>
+                    <h5>{company.description}</h5>
+                    <p>Employees: {company.numEmployees}</p>
+                </div>
+                <div>
+                    {company.logoUrl && <img style={{width: "6rem"}} src={company.logoUrl} alt={`Logo for ${company.name}`} />}
+                </div>
             </div>
-        </Link >
-    </div>);
+        </Link >);
 }
 
 export default CompanyCard;

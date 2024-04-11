@@ -1,5 +1,3 @@
-import "./JobCard.css";
-
 /** Presentational component for displaying job
  *
  * State: None
@@ -9,11 +7,11 @@ import "./JobCard.css";
 */
 function JobCard({ job }) {
     return (
-        <div className="JobCard">
+        <div className="JobCard card mt-4 p-2">
             <h3>{job.title}</h3>
-            <h4>{job.companyName}</h4>
-            <h5>Salary: {job.salary ? `$${job.salary.toLocaleString()}` : "unknown"}</h5>
-            <h5>Equity: {job.equity || "unknown"}</h5>
+            <h6>{job.companyName}</h6>
+            <p  className="m-0">Salary: {job.salary ? `$${job.salary.toLocaleString()}` : "unknown"}</p>
+            <p className="m-0">Equity: {job.equity || "unknown"}</p>
         </div>
     );
 }

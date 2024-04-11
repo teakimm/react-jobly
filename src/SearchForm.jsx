@@ -21,9 +21,9 @@ function SearchForm({ initialInput = "", search }) {
         search(userInput.trim());
     }
 
-    return (<div style={{ width: "50rem" }}>
+    return (<div style={{ width: "100%" }}>
         <form className="d-flex" onSubmit={handleSubmit}>
-            <input className="form-control" onChange={handleChange} value={userInput} type="text" />
+            <input className="form-control" onChange={handleChange} value={userInput} type="text" placeholder="Enter search term" />
             <button className="btn btn-light mx-2">Search</button>
         </form>
     </div>);

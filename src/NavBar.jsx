@@ -28,7 +28,7 @@ function NavBar({ logout }) {
                         <NavLink className="nav-link text-light mx-3" to="/companies">Companies</NavLink>
                         <NavLink className="nav-link text-light mx-3" to="/jobs">Jobs</NavLink>
                         <NavLink className="nav-link text-light mx-3" to="/profile">Profile</NavLink>
-                        <NavLink onClick={handleLogout} className="nav-link text-light mx-3" to="/">Log Out</NavLink>
+                        <NavLink onClick={handleLogout} className="btn text-light mx-3" to="/">Log Out</NavLink>
                     </div>
                     : <div className="d-flex ms-auto">
                         <NavLink className="nav-link text-light mx-3" to="/register">Register</NavLink>

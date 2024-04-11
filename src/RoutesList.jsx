@@ -10,7 +10,7 @@ import NotFound from "./NotFound";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import ProfileUpdateForm from "./ProfileUpdateForm";
-import "./RoutesList.css"
+import "./RoutesList.css";
 
 /** Component for defining routes
  *
@@ -24,21 +24,23 @@ function RoutesList({ login, register, updateProfile }) {
 
     const message = currUser ? "Page not found" : "You shouldn't be here";
 
-    return (<div className="RoutesList">
-        <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginForm login={login} />} />
-            <Route path="/register" element={<RegisterForm register={register} />} />
-            {currUser
-                && <>
-                    <Route path="/jobs" element={<JobsPage />} />
-                    <Route path="/companies" element={<CompaniesPage />} />
-                    <Route path="/companies/:handle" element={<CompanyDetails />} />
-                    <Route path="/profile" element={<ProfileUpdateForm updateProfile={updateProfile} />} />
-                </>
-            }
-            <Route path="*" element={<NotFound message={message} />} />
-        </Routes>
+    return (<div className="RoutesList container">
+        <div className="row">
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<LoginForm login={login} />} />
+                <Route path="/register" element={<RegisterForm register={register} />} />
+                {currUser
+                    && <>
+                        <Route path="/jobs" element={<JobsPage />} />
+                        <Route path="/companies" element={<CompaniesPage />} />
+                        <Route path="/companies/:handle" element={<CompanyDetails />} />
+                        <Route path="/profile" element={<ProfileUpdateForm updateProfile={updateProfile} />} />
+                    </>
+                }
+                <Route path="*" element={<NotFound message={message} />} />
+            </Routes>
+        </div>
     </div>
     );
 }

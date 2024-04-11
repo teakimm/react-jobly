@@ -1,6 +1,7 @@
 import UserContext from "./UserContext";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import Alert from "./Alert";
 
 /** Presentational component for displaying homepage
  *
@@ -18,7 +19,7 @@ function HomePage() {
             <p>Jobs! Get yours jobs here</p>
             {currUser
                 ? <div>
-                    <h3>Welcome back {currUser.username}</h3>
+                    <Alert messages={[`Welcome back ${currUser.username}`]} type={"alert-success"}/>
                 </div>
                 : <div>
                     <NavLink className="btn btn-light mx-2" to="/register">Register</NavLink>
