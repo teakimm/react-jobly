@@ -4,79 +4,63 @@ import userContext from "./userContext";
 import RoutesList from './RoutesList';
 import NavBar from './NavBar';
 import JoblyApi from "../api";
+import { jwtDecode } from "jwt-decode";
+
 
 /** Component for entire page.
  *
  * Props: none
- * State: currUser, token
+ * State: currUser like - {username, firstName, lastName, email, isAdmin, applications}
+ *          applications being an array [jobId, ...]
+ * token - jwt token. Contains information of the currUser
  *
  * App -> NavBar, RoutesList
  *
- * TODO: improve this docstring: give evample of currUser
 */
 
 function App() {
   const [currUser, setCurrUser] = useState(null);
   const [token, setToken] = useState(null);
 
-  // TODO: Decode the token inside of useEffect -- this is bad rn
+  /** sets the token on mount and when the token changes. Decodes the token
+   * and makes an api call with the token to receive user information
+   */
   useEffect(function updateUserInfoOnTokenChange() {
     async function updateUserInfo() {
-      if (currUser?.username && token) {
-        const user = await JoblyApi.getUser(currUser.username);
+      JoblyApi.token = token;
+      try {
+        const user = await JoblyApi.getUser(jwtDecode(token).username);
         setCurrUser(user);
-      } else {
+      } catch {
         setCurrUser(null);
       }
     }
     updateUserInfo();
   }, [token]);
 
-  /** Takes in loginData like {username: ..., password: ...} */
+  /** Takes in loginData like {username: ..., password: ...} and makes an api call
+   * to receive a token. Sets that token in state.
+  */
   async function login(loginData) {
-    try {
-      const token = await JoblyApi.login(loginData.username, loginData.password);
-      JoblyApi.token = token;
-      setCurrUser({ username: loginData.username });
-      setToken(token);
-      return {
-        valid: true,
-        errors: []
-      };
-    } catch (err) {
-      return {
-        valid: false,
-        errors: err
-      };
-    }
+    const token = await JoblyApi.login(loginData.username, loginData.password);
+    setToken(token);
   }
 
+  /** sets the token to null, effectively logging out the user */
   function logout() {
     setToken(null);
   }
 
-  //TODO: move setting of static token to the useEffect function
+  /** takes registerForm data like: {username, password, firstName, lastName, email}
+   * and makes an api call to receive a token. Sets that token in state
+   */
   async function register(registerData) {
-    try {
-      const token = await JoblyApi.register(registerData);
-      JoblyApi.token = token;
-      setCurrUser({ username: registerData.username });
-      setToken(token);
-      return {
-        valid: true,
-        errors: []
-      };
-    } catch (err) {
-      return {
-        valid: false,
-        errors: err
-      };
-    }
+    const token = await JoblyApi.register(registerData);
+    setToken(token);
   }
 
-  // TODO: context does not have to include token
   return (
-    <userContext.Provider value={{ currUser, token }}>
+    <userContext.Provider value={{ currUser }}>
       <BrowserRouter>
         <NavBar logout={logout} />
         <RoutesList login={login} register={register} />

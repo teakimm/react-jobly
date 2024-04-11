@@ -26,6 +26,7 @@ function RegisterForm({ register }) {
     const [errors, setErrors] = useState([]);
     const navigate = useNavigate();
 
+    /** Updates formData state based on user inputs in form */
     function handleChange(evt) {
         const { name, value } = evt.target;
         setFormData(fData => ({
@@ -34,14 +35,14 @@ function RegisterForm({ register }) {
         }));
     }
 
-    // TODO: try catch register here instead of in app
+    /** calls parent function with formData */
     async function handleSubmit(evt) {
         evt.preventDefault();
-        const status = await register(formData);
-        if (!status.valid) {
-            setErrors(status.errors);
-        } else {
+        try {
+            await register(formData);
             navigate("/");
+        } catch (err) {
+            setErrors(err);
         }
     }
 

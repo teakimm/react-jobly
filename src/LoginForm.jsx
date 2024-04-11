@@ -22,7 +22,7 @@ function LoginForm({ login }) {
     const [errors, setErrors] = useState([]);
     const navigate = useNavigate();
 
-    //TODO: missing docstrings for both inner functions
+    /** Updates formData state based on user inputs in form */
     function handleChange(evt) {
         const { name, value } = evt.target;
         setFormData(fData => ({
@@ -31,14 +31,14 @@ function LoginForm({ login }) {
         }));
     }
 
-    // TODO: try catch login here instead of in app
+    /** calls parent function with formData */
     async function handleSubmit(evt) {
         evt.preventDefault();
-        const status = await login(formData);
-        if (!status.valid) {
-            setErrors(status.errors);
-        } else {
+        try {
+            await login(formData);
             navigate("/");
+        } catch (err) {
+            setErrors(err);
         }
     }
 

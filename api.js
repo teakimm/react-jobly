@@ -73,8 +73,7 @@ class JoblyApi {
     return res.token;
   }
 
-  //TODO: improve docstrings
-  /** Registers user */
+  /** Given data about a user make an api call and returns a JWT. */
   static async register(registerData) {
     let res = await this.request({
       endpoint: `auth/register`,
@@ -84,7 +83,16 @@ class JoblyApi {
     return res.token;
   }
 
-  /** Gets user */
+  /** Gets user based on their username. Returns information about a user like:
+   * {
+   *    username: testuser,
+   *    firstName: test,
+   *    lastName: user,
+   *    email: e@email.com,
+   *    isAdmin: false,
+   *    applications: [jobId, ...]
+   * }
+  */
   static async getUser(username) {
     let res = await this.request({
       endpoint: `users/${username}`,
