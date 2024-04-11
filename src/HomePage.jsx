@@ -14,18 +14,20 @@ function HomePage() {
     const { currUser } = useContext(UserContext);
 
     return (
-        <div className="mt-5" style={{ color: "white", textAlign: "center" }}>
-            <h1>Jobly</h1>
-            <p>Jobs! Get yours jobs here</p>
-            {currUser
-                ? <div>
-                    <Alert messages={[`Welcome back ${currUser.username}`]} type={"alert-success"}/>
-                </div>
-                : <div>
-                    <NavLink className="btn btn-light mx-2" to="/register">Register</NavLink>
-                    <NavLink className="btn btn-light mx-2" to="/login">Log In</NavLink>
-                </div>
-            }
+        <div className="col-12 d-flex align-items-center flex-column">
+            <div className="mt-5" style={{ color: "white", textAlign: "center", width: "15rem" }}>
+                <h1>Jobly</h1>
+                <p>Jobs! Get yours jobs here</p>
+                {currUser
+                    ? <div>
+                        <Alert messages={[`Welcome back ${currUser.username}`]} type={"alert-success"} />
+                    </div>
+                    : <div>
+                        <NavLink className="btn btn-light mx-2" to="/register">Register</NavLink>
+                        <NavLink className="btn btn-light mx-2" to="/login">Log In</NavLink>
+                    </div>
+                }
+            </div>
         </div>
     );
 }

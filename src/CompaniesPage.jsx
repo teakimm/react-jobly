@@ -51,7 +51,7 @@ function CompaniesPage() {
     }
 
     return (
-        <div className="mt-5 offset-1 col-10 " style={{ overflow: "clip" }}>
+        <div className="mt-5 col-12 col-md-10 offset-md-1" style={{ overflow: "clip" }}>
             <SearchForm initialInput={searchFilter} search={search} />
             <div className="mt-5" style={{ color: "white" }}>
                 {searchFilter

@@ -47,10 +47,10 @@ function RegisterForm({ register }) {
     }
 
     return (
-        <div>
+        <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3" >
 
             <h1 className="mt-5" style={{ color: "white" }}>Register</h1>
-            <div className="card p-4 mt-3" style={{ width: "28rem" }}>
+            <div className="card p-4 mt-3">
 
                 <form className="mb-3" onSubmit={handleSubmit}>
                     <div className="mb-3">

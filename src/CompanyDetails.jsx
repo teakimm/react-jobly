@@ -40,7 +40,7 @@ function CompanyDetails() {
     if (isLoading) return <h1 className="text-light">Loading...</h1>;
 
     return (
-        <div className="mt-5 offset-1 col-10">
+        <div className="mt-5 col-12 col-md-10 offset-md-1">
             {company
                 ? <div style={{ color: "white" }}>
                     <h2>{company.name}</h2>
