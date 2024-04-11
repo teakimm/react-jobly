@@ -58,29 +58,32 @@ function ProfileUpdateForm({ updateProfile }) {
     }
 
     return (
-        <div className="card p-4 mt-5 ProfileUpdateForm" style={{width: "25rem"}}>
-            <form className="mb-3" onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <label className="form-label" htmlFor="username">Username:</label>
-                    <input className="form-control" name="username" id="username" value={currUser.username} type="text" disabled />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label" htmlFor="firstName">First Name:</label>
-                    <input className="form-control" name="firstName" id="firstName" onChange={handleChange} value={formData.firstName} type="text" />
-                </div>
-                <div className="mb-3" >
-                    <label className="form-label" htmlFor="lastName">Last Name:</label>
-                    <input className="form-control" name="lastName" id="lastName" onChange={handleChange} value={formData.lastName} type="text" />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label" htmlFor="email">Email:</label>
-                    <input className="form-control" name="email" id="email" onChange={handleChange} value={formData.email} type="email" />
-                </div>
+        <div>
+            <h1 className="mt-5" style={{ color: "white" }}>Edit Profile</h1>
+            <div className="card p-4 mt-3" style={{ width: "25rem" }}>
+                <form className="mb-3" onSubmit={handleSubmit}>
+                    <div className="mb-3">
+                        <label className="form-label" htmlFor="username">Username:</label>
+                        <input className="form-control" name="username" id="username" value={currUser.username} type="text" disabled />
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label" htmlFor="firstName">First Name:</label>
+                        <input className="form-control" name="firstName" id="firstName" onChange={handleChange} value={formData.firstName} type="text" />
+                    </div>
+                    <div className="mb-3" >
+                        <label className="form-label" htmlFor="lastName">Last Name:</label>
+                        <input className="form-control" name="lastName" id="lastName" onChange={handleChange} value={formData.lastName} type="text" />
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label" htmlFor="email">Email:</label>
+                        <input className="form-control" name="email" id="email" onChange={handleChange} value={formData.email} type="email" />
+                    </div>
 
-                <button className="btn btn-secondary">Update</button>
+                    <button className="btn btn-secondary">Update</button>
 
-            </form>
-            {alertMessages && <Alert messages={alertMessages.messages} type={alertMessages.type} />}
+                </form>
+                {alertMessages && <Alert messages={alertMessages.messages} type={alertMessages.type} />}
+            </div>
         </div>
     );
 }

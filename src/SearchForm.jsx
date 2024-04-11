@@ -21,10 +21,10 @@ function SearchForm({ initialInput = "", search }) {
         search(userInput.trim());
     }
 
-    return (<div>
-        <form onSubmit={handleSubmit}>
-            <input onChange={handleChange} value={userInput} type="text" />
-            <button>Search</button>
+    return (<div style={{ width: "50rem" }}>
+        <form className="d-flex" onSubmit={handleSubmit}>
+            <input className="form-control" onChange={handleChange} value={userInput} type="text" />
+            <button className="btn btn-light mx-2">Search</button>
         </form>
     </div>);
 }

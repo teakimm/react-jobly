@@ -13,7 +13,7 @@ function HomePage() {
     const { currUser } = useContext(UserContext);
 
     return (
-        <div>
+        <div className="mt-5" style={{ color: "white", textAlign: "center" }}>
             <h1>Jobly</h1>
             <p>Jobs! Get yours jobs here</p>
             {currUser
@@ -21,8 +21,8 @@ function HomePage() {
                     <h3>Welcome back {currUser.username}</h3>
                 </div>
                 : <div>
-                    <NavLink className="btn btn-primary mx-2" to="/register">Register</NavLink>
-                    <NavLink className="btn btn-primary" to="/login">Log In</NavLink>
+                    <NavLink className="btn btn-light mx-2" to="/register">Register</NavLink>
+                    <NavLink className="btn btn-light mx-2" to="/login">Log In</NavLink>
                 </div>
             }
         </div>

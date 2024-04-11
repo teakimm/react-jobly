@@ -48,25 +48,42 @@ function RegisterForm({ register }) {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username:</label>
-                <input name="username" id="username" onChange={handleChange} value={formData.username} type="text" />
 
-                <label htmlFor="password">Password:</label>
-                <input name="password" id="password" onChange={handleChange} value={formData.password} type="password" />
+            <h1 className="mt-5" style={{ color: "white" }}>Register</h1>
+            <div className="card p-4 mt-3" style={{ width: "28rem" }}>
 
-                <label htmlFor="firstName">First Name:</label>
-                <input name="firstName" id="firstName" onChange={handleChange} value={formData.firstName} type="text" />
+                <form className="mb-3" onSubmit={handleSubmit}>
+                    <div className="mb-3">
+                        <label className="form-label" htmlFor="username">Username:</label>
+                        <input className="form-control" name="username" id="username" onChange={handleChange} value={formData.username} type="text" />
 
-                <label htmlFor="lastName">Last Name:</label>
-                <input name="lastName" id="lastName" onChange={handleChange} value={formData.lastName} type="text" />
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label" htmlFor="password">Password:</label>
+                        <input className="form-control" name="password" id="password" onChange={handleChange} value={formData.password} type="password" />
 
-                <label htmlFor="email">Email:</label>
-                <input name="email" id="email" onChange={handleChange} value={formData.email} type="email" />
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label" htmlFor="firstName">First Name:</label>
+                        <input className="form-control" name="firstName" id="firstName" onChange={handleChange} value={formData.firstName} type="text" />
 
-                <button>Register</button>
-            </form>
-            {errors.length > 0 && <Alert messages={errors} />}
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label" htmlFor="lastName">Last Name:</label>
+                        <input className="form-control" name="lastName" id="lastName" onChange={handleChange} value={formData.lastName} type="text" />
+
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label" htmlFor="email">Email:</label>
+                        <input className="form-control" name="email" id="email" onChange={handleChange} value={formData.email} type="email" />
+                    </div>
+
+
+
+                    <button className="btn btn-primary">Register</button>
+                </form>
+                {errors.length > 0 && <Alert messages={errors} />}
+            </div>
         </div>
     );
 }

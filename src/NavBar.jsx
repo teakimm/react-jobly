@@ -18,7 +18,7 @@ function NavBar({ logout }) {
 
     return (
 
-        <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: "#2c1a4d" }}>
             <div className="container-fluid">
 
                 <NavLink className="navbar-brand text-light" to="/">Jobly</NavLink>

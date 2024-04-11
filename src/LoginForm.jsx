@@ -45,18 +45,26 @@ function LoginForm({ login }) {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username:</label>
-                <input name="username" id="username" onChange={handleChange} value={formData.username} type="text" />
+            <h1 className="mt-5" style={{ color: "white" }}>Login</h1>
+            <div className="card p-4 mt-3" style={{ width: "20rem" }}>
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-3">
+                        <label className="form-label" htmlFor="username">Username:</label>
+                        <input className="form-control" name="username" id="username" onChange={handleChange} value={formData.username} type="text" />
+                    </div>
 
-                <label htmlFor="password">Password:</label>
-                <input name="password" id="password" onChange={handleChange} value={formData.password} type="password" />
+                    <div className="mb-3">
+                        <label className="form-label" htmlFor="password">Password:</label>
+                        <input className="form-control" name="password" id="password" onChange={handleChange} value={formData.password} type="password" />
+                    </div>
 
-                <button>Login</button>
-            </form>
-            {errors.length > 0 && <Alert messages={errors} />}
 
+                    <button className="btn btn-primary">Login</button>
+                </form>
+                {errors.length > 0 && <Alert messages={errors} />}
+            </div>
         </div>
+
     );
 }
 
