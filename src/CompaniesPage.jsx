@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import JoblyApi from "../api";
 import CompaniesList from "./CompaniesList";
 import SearchForm from "./SearchForm";
-import userContext from "./userContext";
+import UserContext from "./UserContext";
 
 /** Smart component to render companies
  *
@@ -21,9 +21,9 @@ function CompaniesPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [searchFilter, setSearchFilter] = useState("");
 
-    const { currUser} = useContext(userContext);
+    const { currUser } = useContext(UserContext);
     if (!currUser) {
-        return <Navigate to="/"/>
+        return <Navigate to="/" />;
     }
 
     async function fetchCompanies(searchParam = "") {

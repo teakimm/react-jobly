@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import userContext from "./userContext";
+import UserContext from "./UserContext";
 
 /** Component for navigation bar
  *
@@ -10,7 +10,7 @@ import userContext from "./userContext";
  * App -> NavBar
  */
 function NavBar({ logout }) {
-    const { currUser } = useContext(userContext);
+    const { currUser } = useContext(UserContext);
 
     function handleLogout() {
         logout();
@@ -27,6 +27,7 @@ function NavBar({ logout }) {
                     ? <div className="d-flex ms-auto">
                         <NavLink className="nav-link text-light mx-3" to="/companies">Companies</NavLink>
                         <NavLink className="nav-link text-light mx-3" to="/jobs">Jobs</NavLink>
+                        <NavLink className="nav-link text-light mx-3" to="/profile">Profile</NavLink>
                         <NavLink onClick={handleLogout} className="nav-link text-light mx-3" to="/">Log Out</NavLink>
                     </div>
                     : <div className="d-flex ms-auto">

@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import JoblyApi from "../api";
 import JobsList from "./JobsList";
 import NotFound from "./NotFound";
-import userContext from "./userContext";
+import userContext from "./UserContext";
 
 /** Component for displaying company details
  *

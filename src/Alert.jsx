@@ -7,11 +7,11 @@
  * RegisterForm, LoginForm -> Alert
  *
  */
-function Alert({ errors }) {
+function Alert({ messages, type = "alert-danger" }) {
     return (
-        <div className="alert alert-danger">
-            {errors.map((error, idx) =>
-                <div key={idx}>{error}</div>
+        <div className={`alert ${type}`} >
+            {messages.map((message, idx) =>
+                <div key={idx}>{message}</div>
             )}
         </div>
 

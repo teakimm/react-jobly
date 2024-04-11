@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
-import userContext from "./userContext";
+import UserContext from "./UserContext";
 import RoutesList from './RoutesList';
 import NavBar from './NavBar';
 import JoblyApi from "../api";
@@ -19,7 +19,7 @@ import { jwtDecode } from "jwt-decode";
 
 function App() {
   const [currUser, setCurrUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem("token") || null);
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const [firstLoading, setFirstLoading] = useState(true);
 
   /** sets the token on mount and when the token changes. Decodes the token
@@ -47,14 +47,14 @@ function App() {
     updateUserInfo();
   }
 
-  if (firstLoading) updateUserInfoOnTokenChange();
+
   useEffect(updateUserInfoOnTokenChange, [token]);
 
   /** Takes in loginData like {username: ..., password: ...} and makes an api call
    * to receive a token. Sets that token in state.
   */
   async function login(loginData) {
-    const token = await JoblyApi.login(loginData.username, loginData.password);
+    const token = await JoblyApi.login(loginData);
     setToken(token);
   }
 
@@ -71,15 +71,21 @@ function App() {
     setToken(token);
   }
 
+  async function updateProfile(updateData) {
+    const updatedUser = await JoblyApi.updateUser(currUser.username, updateData);
+    setCurrUser(currUser => ({
+      ...currUser,
+      ...updatedUser
+    }));
+  }
+
   return (
-    <userContext.Provider value={{ currUser }}>
+    <UserContext.Provider value={{ currUser }}>
       <BrowserRouter>
         <NavBar logout={logout} />
-        {firstLoading
-          ? <h1>Loading...</h1>
-          : <RoutesList login={login} register={register} />}
+        {firstLoading || <RoutesList login={login} register={register} updateProfile={updateProfile} />}
       </BrowserRouter>
-    </userContext.Provider>
+    </UserContext.Provider>
   );
 };
 

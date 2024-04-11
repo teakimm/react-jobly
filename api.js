@@ -64,10 +64,10 @@ class JoblyApi {
   }
 
   /** Login, returns token */
-  static async login(username, password) {
+  static async login(userData) {
     let res = await this.request({
       endpoint: `auth/token`,
-      data: { username, password },
+      data: userData,
       method: "POST"
     });
     return res.token;
@@ -101,6 +101,23 @@ class JoblyApi {
     return res.user;
   }
 
+  /** Updates a user's firstName, lastName, or email. Returns info like:
+ * {
+ *    username: testuser,
+ *    firstName: test,
+ *    lastName: user,
+ *    email: e@email.com,
+ *    isAdmin: false,
+ * }
+*/
+  static async updateUser(username, updateData) {
+    let res = await this.request({
+      endpoint: `users/${username}`,
+      data: updateData,
+      method: "PATCH"
+    });
+    return res.user;
+  }
 
 }
 

@@ -66,7 +66,7 @@ function RegisterForm({ register }) {
 
                 <button>Register</button>
             </form>
-            {errors.length > 0 && <Alert errors={errors} />}
+            {errors.length > 0 && <Alert messages={errors} />}
         </div>
     );
 }

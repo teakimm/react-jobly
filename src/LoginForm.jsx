@@ -33,6 +33,7 @@ function LoginForm({ login }) {
 
     /** calls parent function with formData */
     async function handleSubmit(evt) {
+
         evt.preventDefault();
         try {
             await login(formData);
@@ -53,7 +54,7 @@ function LoginForm({ login }) {
 
                 <button>Login</button>
             </form>
-            {errors.length > 0 && <Alert errors={errors} />}
+            {errors.length > 0 && <Alert messages={errors} />}
 
         </div>
     );
