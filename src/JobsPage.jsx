@@ -21,7 +21,7 @@ function JobsPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [searchFilter, setSearchFilter] = useState("");
 
-    const { currUser} = useContext(userContext);
+    const { currUser } = useContext(userContext);
     if (!currUser) {
         return <Navigate to="/"/>
     }

@@ -20,11 +20,13 @@ import { jwtDecode } from "jwt-decode";
 function App() {
   const [currUser, setCurrUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token") || null);
+  const [firstLoading, setFirstLoading] = useState(true);
 
   /** sets the token on mount and when the token changes. Decodes the token
    * and makes an api call with the token to receive user information
    */
-  useEffect(function updateUserInfoOnTokenChange() {
+  function updateUserInfoOnTokenChange() {
+
     async function updateUserInfo() {
       try {
         const user = await JoblyApi.getUser(jwtDecode(token).username);
@@ -32,11 +34,21 @@ function App() {
       } catch {
         setCurrUser(null);
       }
+      setFirstLoading(false);
+    }
+
+    if (!token) {
+      localStorage.removeItem("token");
+    } else {
+      localStorage.setItem("token", token);
     }
     JoblyApi.token = token;
-    localStorage.setItem("token", token);
+
     updateUserInfo();
-  }, [token]);
+  }
+
+  if (firstLoading) updateUserInfoOnTokenChange();
+  useEffect(updateUserInfoOnTokenChange, [token]);
 
   /** Takes in loginData like {username: ..., password: ...} and makes an api call
    * to receive a token. Sets that token in state.
@@ -63,7 +75,9 @@ function App() {
     <userContext.Provider value={{ currUser }}>
       <BrowserRouter>
         <NavBar logout={logout} />
-        <RoutesList login={login} register={register} />
+        {firstLoading
+          ? <h1>Loading...</h1>
+          : <RoutesList login={login} register={register} />}
       </BrowserRouter>
     </userContext.Provider>
   );
