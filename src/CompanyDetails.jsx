@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import JoblyApi from "../api";
 import JobsList from "./JobsList";
 import NotFound from "./NotFound";
-import userContext from "./UserContext";
+import UserContext from "./UserContext";
 
 /** Component for displaying company details
  *
@@ -19,7 +19,7 @@ function CompanyDetails() {
 
     const { handle } = useParams();
 
-    const { currUser } = useContext(userContext);
+    const { currUser } = useContext(UserContext);
     if (!currUser) {
         return <Navigate to="/" />;
     }

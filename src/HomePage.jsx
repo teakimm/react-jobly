@@ -1,4 +1,4 @@
-import userContext from "./UserContext";
+import UserContext from "./UserContext";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -10,7 +10,7 @@ import { NavLink } from "react-router-dom";
  * RoutesList -> HomePage
 */
 function HomePage() {
-    const { currUser } = useContext(userContext);
+    const { currUser } = useContext(UserContext);
 
     return (
         <div>

@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import JoblyApi from "../api";
 import JobsList from "./JobsList";
 import SearchForm from "./SearchForm";
-import userContext from "./UserContext";
+import UserContext from "./UserContext";
 
 /** smart component to render jobs
  *
@@ -21,7 +21,7 @@ function JobsPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [searchFilter, setSearchFilter] = useState("");
 
-    const { currUser } = useContext(userContext);
+    const { currUser } = useContext(UserContext);
     if (!currUser) {
         return <Navigate to="/" />;
     }
