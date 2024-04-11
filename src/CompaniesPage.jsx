@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { Navigate } from "react-router-dom";
 import JoblyApi from "../api";
 import CompaniesList from "./CompaniesList";
 import SearchForm from "./SearchForm";
+import userContext from "./userContext";
+
 /** Smart component to render companies
  *
  * state:
@@ -18,12 +21,16 @@ function CompaniesPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [searchFilter, setSearchFilter] = useState("");
 
+    const { currUser} = useContext(userContext);
+    if (!currUser) {
+        return <Navigate to="/"/>
+    }
+
     async function fetchCompanies(searchParam = "") {
         const companiesResponse = await JoblyApi.getCompanies(searchParam);
         setCompanies(companiesResponse);
         setIsLoading(false);
     }
-
 
     useEffect(function fetchCompaniesWhenMounted() {
         fetchCompanies();

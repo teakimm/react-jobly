@@ -8,7 +8,6 @@ import NotFound from "./NotFound";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 
-
 /** Component for defining routes
  *
  * State: None
@@ -20,11 +19,11 @@ function RoutesList({ login, register }) {
     return (
         <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/jobs" element={<JobsPage />} />
             <Route path="/companies" element={<CompaniesPage />} />
+            <Route path="/companies/:handle" element={<CompanyDetails />} />
             <Route path="/login" element={<LoginForm login={login} />} />
             <Route path="/register" element={<RegisterForm register={register} />} />
-            <Route path="/companies/:handle" element={<CompanyDetails />} />
-            <Route path="/jobs" element={<JobsPage />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     );

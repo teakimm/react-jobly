@@ -1,8 +1,10 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { Navigate } from "react-router-dom";
 import JoblyApi from "../api";
 import JobsList from "./JobsList";
 import NotFound from "./NotFound";
+import userContext from "./userContext";
 
 /** Component for displaying company details
  *
@@ -12,10 +14,15 @@ import NotFound from "./NotFound";
  * RoutesList -> CompanyDetails -> JobList
 */
 function CompanyDetails() {
-    const { handle } = useParams();;
-
     const [company, setCompany] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+
+    const { handle } = useParams();
+
+    const { currUser } = useContext(userContext);
+    if (!currUser) {
+        return <Navigate to="/" />;
+    }
 
     useEffect(function fetchCompanyWhenMounted() {
         async function fetchCompany() {

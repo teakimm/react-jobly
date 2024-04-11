@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { Navigate } from "react-router-dom";
 import JoblyApi from "../api";
 import JobsList from "./JobsList";
 import SearchForm from "./SearchForm";
@@ -20,11 +21,10 @@ function JobsPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [searchFilter, setSearchFilter] = useState("");
 
-    const { currUser, token } = useContext(userContext);
-
-    console.log("currUser", currUser);
-    console.log("token", token);
-
+    const { currUser} = useContext(userContext);
+    if (!currUser) {
+        return <Navigate to="/"/>
+    }
 
     async function fetchJobs(searchParam = "") {
         const jobResponse = await JoblyApi.getJobs(searchParam);

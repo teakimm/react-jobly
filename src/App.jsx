@@ -6,7 +6,6 @@ import NavBar from './NavBar';
 import JoblyApi from "../api";
 import { jwtDecode } from "jwt-decode";
 
-
 /** Component for entire page.
  *
  * Props: none
@@ -20,14 +19,13 @@ import { jwtDecode } from "jwt-decode";
 
 function App() {
   const [currUser, setCurrUser] = useState(null);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem("token") || null);
 
   /** sets the token on mount and when the token changes. Decodes the token
    * and makes an api call with the token to receive user information
    */
   useEffect(function updateUserInfoOnTokenChange() {
     async function updateUserInfo() {
-      JoblyApi.token = token;
       try {
         const user = await JoblyApi.getUser(jwtDecode(token).username);
         setCurrUser(user);
@@ -35,6 +33,8 @@ function App() {
         setCurrUser(null);
       }
     }
+    JoblyApi.token = token;
+    localStorage.setItem("token", token);
     updateUserInfo();
   }, [token]);
 

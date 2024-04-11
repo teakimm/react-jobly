@@ -6,11 +6,11 @@
  *
  * RoutesList -> NotFound
  */
-function NotFound() { //TODO: consider using a prop to give information to lost user
+function NotFound({ message = "Page not found" }) {
     return (
         <div>
             <h1>404</h1>
-            hey you're not supposed to be here right now
+            <h4>{message}</h4>
         </div>
     );
 }
