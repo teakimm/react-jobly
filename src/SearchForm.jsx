@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { debounce } from "lodash";
 
 /** Component for rendering search form
  *
@@ -11,20 +12,20 @@ import { useState } from "react";
 function SearchForm({ initialInput = "", search }) {
     const [userInput, setUserInput] = useState(initialInput);
 
+    const debouncedSearch = useCallback(debounce(search, 200), []);
+
+    useEffect(() => {
+        debouncedSearch(userInput.trim());
+    }, [userInput]);
+
     function handleChange(evt) {
         setUserInput(evt.target.value);
     }
 
-    function handleSubmit(evt) {
-        evt.preventDefault();
-        setUserInput(userInput.trim());
-        search(userInput.trim());
-    }
 
     return (<div style={{ width: "100%" }}>
-        <form className="d-flex" onSubmit={handleSubmit}>
+        <form>
             <input className="form-control" onChange={handleChange} value={userInput} type="text" placeholder="Enter search term" />
-            <button className="btn btn-light mx-2">Search</button>
         </form>
     </div>);
 }
