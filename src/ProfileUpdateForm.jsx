@@ -58,9 +58,9 @@ function ProfileUpdateForm({ updateProfile }) {
     }
 
     return (
-        <div>
+        <div className="col-6 offset-3">
             <h1 className="mt-5" style={{ color: "white" }}>Edit Profile</h1>
-            <div className="card p-4 mt-3" style={{ width: "25rem" }}>
+            <div className="card p-4 mt-3">
                 <form className="mb-3" onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <label className="form-label" htmlFor="username">Username:</label>

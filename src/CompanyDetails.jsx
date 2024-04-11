@@ -37,12 +37,12 @@ function CompanyDetails() {
         fetchCompany();
     }, []);
 
-    if (isLoading) return <h1>Loading...</h1>;
+    if (isLoading) return <h1 className="text-light">Loading...</h1>;
 
     return (
         <div className="mt-5 offset-1 col-10">
             {company
-                ? <div style={{color: "white"}}>
+                ? <div style={{ color: "white" }}>
                     <h2>{company.name}</h2>
                     <p>{company.description}</p>
                     <JobsList jobs={company.jobs} />

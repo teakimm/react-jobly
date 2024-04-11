@@ -47,11 +47,11 @@ function CompaniesPage() {
     function renderCompanies() {
         return (companies && companies.length > 0)
             ? <CompaniesList companies={companies} />
-            : "Sorry, no results were found!";
+            : <p className="mt-4 text-light">Sorry, no results were found!</p>;
     }
 
     return (
-        <div className="mt-5 offset-1 col-10">
+        <div className="mt-5 offset-1 col-10 " style={{ overflow: "clip" }}>
             <SearchForm initialInput={searchFilter} search={search} />
             <div className="mt-5" style={{ color: "white" }}>
                 {searchFilter
@@ -59,7 +59,7 @@ function CompaniesPage() {
                     : <h1>All Companies</h1>}
             </div>
             {isLoading
-                ? <h1>Loading...</h1>
+                ? <h1 className="text-light">Loading...</h1>
                 : <div> {renderCompanies()} </div>}
         </div>
     );

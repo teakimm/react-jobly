@@ -47,11 +47,11 @@ function JobsPage() {
     function renderJobs() {
         return (jobs && jobs.length > 0)
             ? <JobsList jobs={jobs} />
-            : "Sorry, no results were found!";
+            : <p className="mt-4 text-light">Sorry, no results were found!</p>;
     }
 
     return (
-        <div className="mt-5 offset-1 col-10">
+        <div className="mt-5 offset-1 col-10" style={{ overflow: "clip" }}>
             <SearchForm initialInput={searchFilter} search={search} />
             <div className="mt-5" style={{ color: "white" }}>
                 {searchFilter
@@ -59,10 +59,10 @@ function JobsPage() {
                     : <h1>All Jobs</h1>}
             </div>
             {isLoading
-                ? <h1>Loading...</h1>
+                ? <h1 className="text-light">Loading...</h1>
                 : <div> {renderJobs()} </div>}
-        </div>
+        </ div>
     );
 }
 
-export default JobsPage;
+export default JobsPage;;
