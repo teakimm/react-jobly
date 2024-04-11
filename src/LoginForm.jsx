@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import userContext from "./userContext";
+import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
 
-const initialFormData = {
+const INITIAL_FORM_DATA = {
     username: "",
     password: ""
 };
@@ -19,10 +18,11 @@ const initialFormData = {
  *  RoutesList -> LoginForm
 */
 function LoginForm({ login }) {
-    const [formData, setFormData] = useState(initialFormData);
+    const [formData, setFormData] = useState(INITIAL_FORM_DATA);
     const [errors, setErrors] = useState([]);
     const navigate = useNavigate();
 
+    //TODO: missing docstrings for both inner functions
     function handleChange(evt) {
         const { name, value } = evt.target;
         setFormData(fData => ({
@@ -31,6 +31,7 @@ function LoginForm({ login }) {
         }));
     }
 
+    // TODO: try catch login here instead of in app
     async function handleSubmit(evt) {
         evt.preventDefault();
         const status = await login(formData);
@@ -39,7 +40,6 @@ function LoginForm({ login }) {
         } else {
             navigate("/");
         }
-
     }
 
     return (

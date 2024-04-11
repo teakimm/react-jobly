@@ -73,6 +73,8 @@ class JoblyApi {
     return res.token;
   }
 
+  //TODO: improve docstrings
+  /** Registers user */
   static async register(registerData) {
     let res = await this.request({
       endpoint: `auth/register`,

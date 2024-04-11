@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Alert from "./Alert";
+
 
 const INITIAL_FORM_DATA = {
     username: "",
@@ -16,10 +19,12 @@ const INITIAL_FORM_DATA = {
  * Props:
  *  handleSubmit -> function to call when user submits form
  *
- *  RoutesList -> registerForm
+ *  RoutesList -> RegisterForm
 */
 function RegisterForm({ register }) {
     const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+    const [errors, setErrors] = useState([]);
+    const navigate = useNavigate();
 
     function handleChange(evt) {
         const { name, value } = evt.target;
@@ -29,9 +34,15 @@ function RegisterForm({ register }) {
         }));
     }
 
-    function handleSubmit(evt) {
+    // TODO: try catch register here instead of in app
+    async function handleSubmit(evt) {
         evt.preventDefault();
-        register(formData);
+        const status = await register(formData);
+        if (!status.valid) {
+            setErrors(status.errors);
+        } else {
+            navigate("/");
+        }
     }
 
     return (
@@ -54,6 +65,7 @@ function RegisterForm({ register }) {
 
                 <button>Register</button>
             </form>
+            {errors.length > 0 && <Alert errors={errors} />}
         </div>
     );
 }
