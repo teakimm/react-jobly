@@ -8,8 +8,17 @@ const INITIAL_FORM_DATA = {
     email: ""
 };
 
-/** TODO: */
-function RegisterPage({ register }) {
+/** Component for rendering register form
+ *
+ * State:
+ * - formData (object of user inputs)
+ * - errors like: ["invalid username/password", ...]
+ * Props:
+ *  handleSubmit -> function to call when user submits form
+ *
+ *  RoutesList -> registerForm
+*/
+function RegisterForm({ register }) {
     const [formData, setFormData] = useState(INITIAL_FORM_DATA);
 
     function handleChange(evt) {
@@ -49,4 +58,4 @@ function RegisterPage({ register }) {
     );
 }
 
-export default RegisterPage;
+export default RegisterForm;

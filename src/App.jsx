@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, redirect } from "react-router-dom";
 import RoutesList from './RoutesList';
 import NavBar from './NavBar';
 import userContext from "./userContext";
@@ -30,10 +30,21 @@ function App() {
 
   /** Takes in loginData like {username: ..., password: ...} */
   async function login(loginData) {
-    const token = await JoblyApi.login(loginData.username, loginData.password);
-    JoblyApi.token = token;
-    setCurrUser({ username: loginData.username });
-    setToken(token);
+    try {
+      const token = await JoblyApi.login(loginData.username, loginData.password);
+      JoblyApi.token = token;
+      setCurrUser({ username: loginData.username });
+      setToken(token);
+      return {
+        valid: true,
+        errors: []
+      };
+    } catch (err) {
+      return {
+        valid: false,
+        errors: err
+      };
+    }
   }
 
   function logout() {
@@ -47,8 +58,6 @@ function App() {
     setToken(token);
   }
 
-  console.log(currUser);
-  console.log(token);
 
   return (
     <userContext.Provider value={{ currUser, token }}>

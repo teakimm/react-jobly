@@ -5,9 +5,8 @@ import CompaniesPage from "./CompaniesPage";
 import CompanyDetails from "./CompanyDetails";
 import JobsPage from "./JobsPage";
 import NotFound from "./NotFound";
-import LoginPage from "./LoginPage";
-import SignUpPage from "./SignUpPage";
-import RegisterPage from "./RegisterPage";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
 
 
 /** Component for defining routes
@@ -22,8 +21,8 @@ function RoutesList({ login, register }) {
         <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/companies" element={<CompaniesPage />} />
-            <Route path="/login" element={<LoginPage login={login} />} />
-            <Route path="/register" element={<RegisterPage register={register} />} />
+            <Route path="/login" element={<LoginForm login={login} />} />
+            <Route path="/register" element={<RegisterForm register={register} />} />
             <Route path="/companies/:handle" element={<CompanyDetails />} />
             <Route path="/jobs" element={<JobsPage />} />
             <Route path="*" element={<NotFound />} />
