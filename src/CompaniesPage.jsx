@@ -22,7 +22,7 @@ function CompaniesPage() {
     const [searchFilter, setSearchFilter] = useState("");
 
     const [queryParams, setQueryParams] = useSearchParams();
-    const [currPage, setCurrPage] = useState(Number(queryParams.get("page")));
+    const [currPage, setCurrPage] = useState(queryParams.get("page") ? Number(queryParams.get("page")) : 1);
 
     const navigate = useNavigate();
 
@@ -31,10 +31,9 @@ function CompaniesPage() {
     }
 
     useEffect(function updateQueryStringOnCurrPageChange() {
-        console.log(currPage);
         if (!Number.isInteger(currPage)) {
-            console.log("Should be navigating soon");
             navigate("/404");
+            return;
         }
         setQueryParams(new URLSearchParams({ page: currPage }));
     }, [currPage]);

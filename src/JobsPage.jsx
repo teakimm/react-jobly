@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Navigate, useSearchParams } from "react-router-dom";
+import { Navigate, useSearchParams, useNavigate } from "react-router-dom";
 import JoblyApi from "../api";
 import JobsList from "./JobsList";
 import SearchForm from "./SearchForm";
@@ -22,15 +22,23 @@ function JobsPage() {
     const [searchFilter, setSearchFilter] = useState("");
 
     const [queryParams, setQueryParams] = useSearchParams();
-    const [currPage, setCurrPage] = useState(queryParams.get("page") || 1);
+    const [currPage, setCurrPage] = useState(queryParams.get("page") ? Number(queryParams.get("page")) : 1);
+
+
+    const navigate = useNavigate();
 
     function handlePageChange(newPageNum) {
         setCurrPage(newPageNum);
     }
 
-    useEffect(function something() {
+    useEffect(function updateQueryStringOnCurrPageChange() {
+        if (!Number.isInteger(currPage)) {
+            navigate("/404");
+            return;
+        }
         setQueryParams(new URLSearchParams({ page: currPage }));
     }, [currPage]);
+
 
     const { currUser } = useContext(UserContext);
     if (!currUser) {

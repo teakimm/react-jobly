@@ -14,9 +14,11 @@ function HomePage() {
     const { currUser } = useContext(UserContext);
 
     return (
-        <div className="col-12 d-flex align-items-center flex-column">
-            <div className="mt-5" style={{ color: "white", textAlign: "center", width: "15rem" }}>
-                <h1>Jobly</h1>
+        <div className="col-12 d-flex align-items-center flex-column" style={{
+            backgroundImage: "url(/public/homepageImg.jpg", backgroundSize: "cover", backgroundRepeat: "no-repeat"
+        }}>
+            <img src="../public/joblyLogo.png" alt="logo" style={{ width: "40vw" }} />
+            <div className="mt-1" style={{ color: "white", textAlign: "center", width: "15rem" }}>
                 <p>Jobs! Get yours jobs here</p>
                 {currUser
                     ? <div>
@@ -28,7 +30,7 @@ function HomePage() {
                     </div>
                 }
             </div>
-        </div>
+        </div >
     );
 }
 
