@@ -11,12 +11,12 @@ import Pagination from "./Pagination";
 */
 function JobsList({ jobs }) {
     const [currPage, setCurrPage] = useState(1);
+    const [numItemsPerPage, setNumItemsPerPage] = useState(8);
 
-    console.log(currPage);
 
     function renderJobs() {
-        const startIndex = (currPage-1)*20
-        const jobsToDisplay = jobs.slice(startIndex,startIndex + 20);
+        const startIndex = (currPage - 1) * numItemsPerPage;
+        const jobsToDisplay = jobs.slice(startIndex, startIndex + numItemsPerPage);
         return (jobsToDisplay.map(job =>
             <JobCard
                 key={job.id}
@@ -29,9 +29,13 @@ function JobsList({ jobs }) {
     }
 
     return (
-        <div>
+        <div className="d-flex flex-column align-items-center">
             {renderJobs()}
-            <Pagination currPage={currPage} numItems={jobs.length} handlePageChange={handlePageChange}/>
+            <Pagination
+                currPage={currPage}
+                numItems={jobs.length}
+                handlePageChange={handlePageChange}
+                numItemsPerPage={numItemsPerPage} />
         </div>
     );
 }

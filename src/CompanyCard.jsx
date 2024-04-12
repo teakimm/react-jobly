@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 function CompanyCard({ company }) {
 
     return (
-        <Link className="text-decoration-none" to={`/companies/${company.handle}`}>
+        <Link className="text-decoration-none w-100" to={`/companies/${company.handle}`}>
             <div className="CompanyCard card mt-4 p-4">
                 <div>
                     <h2>{company.name}</h2>

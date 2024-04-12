@@ -1,0 +1,8 @@
+.Pagination-item {
+  color: white;
+  font-size: 2em;
+}
+
+.hidden {
+  visibility: hidden;
+}
