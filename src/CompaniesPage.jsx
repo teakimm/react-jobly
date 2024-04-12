@@ -1,9 +1,10 @@
-import { useState, useEffect, useContext } from "react";
-import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
+import { useContext } from "react";
+import { Navigate } from "react-router-dom";
 import CompaniesList from "./CompaniesList";
 import SearchForm from "./SearchForm";
 import UserContext from "./UserContext";
 import { useFetchCompanies } from "./apiCustomHooks";
+import usePagination from "./usePagination";
 
 /** Smart component to render companies
  *
@@ -18,23 +19,11 @@ import { useFetchCompanies } from "./apiCustomHooks";
  */
 function CompaniesPage() {
     const [companies, isLoading, searchFilter, setSearchFilter] = useFetchCompanies();
-
-    const [queryParams, setQueryParams] = useSearchParams();
-    const [currPage, setCurrPage] = useState(queryParams.get("page") ? Number(queryParams.get("page")) : 1);
-
-    const navigate = useNavigate();
+    const [currPage, setCurrPage] = usePagination();
 
     function handlePageChange(newPageNum) {
         setCurrPage(newPageNum);
     }
-
-    useEffect(function updateQueryStringOnCurrPageChange() {
-        if (!Number.isInteger(currPage)) {
-            navigate("/404");
-            return;
-        }
-        setQueryParams(new URLSearchParams({ page: currPage }));
-    }, [currPage]);
 
     const { currUser } = useContext(UserContext);
     if (!currUser) {

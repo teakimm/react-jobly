@@ -1,9 +1,10 @@
-import { useState, useEffect, useContext } from "react";
-import { Navigate, useSearchParams, useNavigate } from "react-router-dom";
+import {  useContext } from "react";
+import { Navigate} from "react-router-dom";
 import JobsList from "./JobsList";
 import SearchForm from "./SearchForm";
 import UserContext from "./UserContext";
 import { useFetchJobs } from "./apiCustomHooks";
+import usePagination from "./usePagination";
 
 /** smart component to render jobs
  *
@@ -17,27 +18,9 @@ import { useFetchJobs } from "./apiCustomHooks";
  * RouteList -> JobsPage -> JobsList, SearchForm -> JobCard
  */
 
-function usePaginationQueryStrings() {
-    const [queryParams, setQueryParams] = useSearchParams();
-    const [currPage, setCurrPage] = useState(queryParams.get("page") ? Number(queryParams.get("page")) : 1);
-
-    const navigate = useNavigate();
-
-    useEffect(function updateQueryStringOnCurrPageChange() {
-        if (!Number.isInteger(currPage)) {
-            navigate("/404");
-            return;
-        }
-        setQueryParams(new URLSearchParams({ page: currPage }));
-    }, [currPage]);
-
-    return [currPage, setCurrPage];
-}
-
-
 function JobsPage() {
     const [jobs, isLoading, searchFilter, setSearchFilter] = useFetchJobs();
-    const [currPage, setCurrPage] = usePaginationQueryStrings();
+    const [currPage, setCurrPage] = usePagination();
 
     function handlePageChange(newPageNum) {
         setCurrPage(newPageNum);
@@ -50,7 +33,7 @@ function JobsPage() {
 
     /** Make api request with user input and updates state on api response. */
     function search(userInput) {
-        setCurrPage(1); //FIXME: this is what's breaking out query param
+        setCurrPage(1);
         setSearchFilter(userInput);
     }
 
