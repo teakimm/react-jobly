@@ -24,7 +24,7 @@ function NavBar({ logout }) {
                     <i className="bi bi-list" style={{ color: "white", fontSize: "2rem" }}></i>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <ul className="navbar-nav ms-auto mb-0 gap-lg-3">
+                    <ul className="navbar-nav ms-auto mb-0 gap-sm-3">
                         {currUser
                             ? <>
                                 <li className="nav-item">

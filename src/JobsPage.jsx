@@ -16,17 +16,12 @@ import { useFetchJobs } from "./apiCustomHooks";
  *
  * RouteList -> JobsPage -> JobsList, SearchForm -> JobCard
  */
-function JobsPage() {
-    const [jobs, isLoading, searchFilter, setSearchFilter] = useFetchJobs();
 
+function usePaginationQueryStrings() {
     const [queryParams, setQueryParams] = useSearchParams();
     const [currPage, setCurrPage] = useState(queryParams.get("page") ? Number(queryParams.get("page")) : 1);
 
     const navigate = useNavigate();
-
-    function handlePageChange(newPageNum) {
-        setCurrPage(newPageNum);
-    }
 
     useEffect(function updateQueryStringOnCurrPageChange() {
         if (!Number.isInteger(currPage)) {
@@ -36,6 +31,17 @@ function JobsPage() {
         setQueryParams(new URLSearchParams({ page: currPage }));
     }, [currPage]);
 
+    return [currPage, setCurrPage];
+}
+
+
+function JobsPage() {
+    const [jobs, isLoading, searchFilter, setSearchFilter] = useFetchJobs();
+    const [currPage, setCurrPage] = usePaginationQueryStrings();
+
+    function handlePageChange(newPageNum) {
+        setCurrPage(newPageNum);
+    }
 
     const { currUser } = useContext(UserContext);
     if (!currUser) {
