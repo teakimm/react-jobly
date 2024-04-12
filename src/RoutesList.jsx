@@ -25,7 +25,7 @@ function RoutesList({ login, register, updateProfile }) {
     const message = currUser ? "Page not found" : "You shouldn't be here";
 
     return (<div className="RoutesList container">
-        <div className="row" style={{ width: "100%" }}>
+        <div style={{ width: "100%" }}>
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LoginForm login={login} />} />
