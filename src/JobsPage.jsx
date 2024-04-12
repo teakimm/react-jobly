@@ -50,7 +50,7 @@ function JobsPage() {
 
     /** Make api request with user input and updates state on api response. */
     function search(userInput) {
-        setCurrPage(1);
+        setCurrPage(1); //FIXME: this is what's breaking out query param
         setSearchFilter(userInput);
     }
 
