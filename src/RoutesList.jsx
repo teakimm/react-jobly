@@ -38,6 +38,7 @@ function RoutesList({ login, register, updateProfile }) {
                         <Route path="/profile" element={<ProfileUpdateForm updateProfile={updateProfile} />} />
                     </>
                 }
+                <Route path="/404" element={<NotFound message={message} />} />
                 <Route path="*" element={<NotFound message={message} />} />
             </Routes>
         </div>

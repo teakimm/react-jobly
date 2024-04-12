@@ -1,31 +1,25 @@
 import JobCard from "./JobCard";
-import { useState } from "react";
 import Pagination from "./Pagination";
+
+const NUM_ITEMS_PER_PAGE = 8;
 
 /** Presentational component for displaying jobs list
  *
- * State: None
+ * State: curPage
  * Props: jobs like [{id, salary, title, equity, companyName, companyHandle}, ...]
  *
- * JobsPage, CompanyDetails -> JobsList -> JobCard
+ * JobsPage, CompanyDetails -> JobsList -> JobCard, Pagination
 */
-function JobsList({ jobs }) {
-    const [currPage, setCurrPage] = useState(1);
-    const [numItemsPerPage, setNumItemsPerPage] = useState(8);
-
+function JobsList({ jobs, currPage, handlePageChange }) {
 
     function renderJobs() {
-        const startIndex = (currPage - 1) * numItemsPerPage;
-        const jobsToDisplay = jobs.slice(startIndex, startIndex + numItemsPerPage);
+        const startIndex = (currPage - 1) * NUM_ITEMS_PER_PAGE;
+        const jobsToDisplay = jobs.slice(startIndex, startIndex + NUM_ITEMS_PER_PAGE);
         return (jobsToDisplay.map(job =>
             <JobCard
                 key={job.id}
                 job={job} />
         ));
-    }
-
-    function handlePageChange(newPageNum) {
-        setCurrPage(newPageNum);
     }
 
     return (
@@ -35,7 +29,7 @@ function JobsList({ jobs }) {
                 currPage={currPage}
                 numItems={jobs.length}
                 handlePageChange={handlePageChange}
-                numItemsPerPage={numItemsPerPage} />
+                numItemsPerPage={NUM_ITEMS_PER_PAGE} />
         </div>
     );
 }

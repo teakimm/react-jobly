@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
 import JoblyApi from "../api";
 import JobsList from "./JobsList";
 import SearchForm from "./SearchForm";
@@ -20,6 +20,17 @@ function JobsPage() {
     const [jobs, setJobs] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [searchFilter, setSearchFilter] = useState("");
+
+    const [queryParams, setQueryParams] = useSearchParams();
+    const [currPage, setCurrPage] = useState(queryParams.get("page") || 1);
+
+    function handlePageChange(newPageNum) {
+        setCurrPage(newPageNum);
+    }
+
+    useEffect(function something() {
+        setQueryParams(new URLSearchParams({ page: currPage }));
+    }, [currPage]);
 
     const { currUser } = useContext(UserContext);
     if (!currUser) {
@@ -46,12 +57,15 @@ function JobsPage() {
 
     function renderJobs() {
         return (jobs && jobs.length > 0)
-            ? <JobsList jobs={jobs} />
+            ? <JobsList
+                jobs={jobs}
+                currPage={currPage}
+                handlePageChange={handlePageChange} />
             : <p className="mt-4 text-light">Sorry, no results were found!</p>;
     }
 
     return (
-        <div className="mt-5 col-12 col-md-10 offset-md-1" style={{ overflow: "clip" }}>
+        <div className="my-5 col-12 col-md-10 offset-md-1" style={{ overflow: "clip" }}>
             <SearchForm initialInput={searchFilter} search={search} />
             <div className="mt-5" style={{ color: "white" }}>
                 {searchFilter

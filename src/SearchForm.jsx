@@ -22,7 +22,6 @@ function SearchForm({ initialInput = "", search }) {
         setUserInput(evt.target.value);
     }
 
-
     return (<div style={{ width: "100%" }}>
         <form>
             <input className="form-control" onChange={handleChange} value={userInput} type="text" placeholder="Enter search term" />

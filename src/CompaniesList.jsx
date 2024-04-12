@@ -1,22 +1,21 @@
 import CompanyCard from "./CompanyCard";
-import { useState } from "react";
 import Pagination from "./Pagination";
 
+const NUM_ITEMS_PER_PAGE = 8;
 
 /** Presentational component for displaying jobs list
  *
- * State: None
+ * State: currPage
  * Props: companies like [{handle, name, description, logo}, ...]
  *
- * CompaniesPage -> CompaniesList -> CompanyCard
+ * CompaniesPage -> CompaniesList -> CompanyCard. Pagination
 */
-function CompaniesList({ companies }) {
-    const [currPage, setCurrPage] = useState(1);
-    const [numItemsPerPage, setNumItemsPerPage] = useState(5);
+function CompaniesList({ companies, currPage, handlePageChange }) {
+
 
     function renderCompanies() {
-        const startIndex = (currPage - 1) * numItemsPerPage;
-        const companiesToDisplay = companies.slice(startIndex, startIndex + numItemsPerPage);
+        const startIndex = (currPage - 1) * NUM_ITEMS_PER_PAGE;
+        const companiesToDisplay = companies.slice(startIndex, startIndex + NUM_ITEMS_PER_PAGE);
         return (
             companiesToDisplay.map(company =>
                 <CompanyCard
@@ -26,11 +25,6 @@ function CompaniesList({ companies }) {
         );
     }
 
-
-    function handlePageChange(newPageNum) {
-        setCurrPage(newPageNum);
-    }
-
     return (
         <div className="d-flex flex-column align-items-center">
             {renderCompanies()}
@@ -38,7 +32,7 @@ function CompaniesList({ companies }) {
                 currPage={currPage}
                 numItems={companies.length}
                 handlePageChange={handlePageChange}
-                numItemsPerPage={numItemsPerPage} />
+                numItemsPerPage={NUM_ITEMS_PER_PAGE} />
         </div>
     );
 }

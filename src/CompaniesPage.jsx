@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import JoblyApi from "../api";
 import CompaniesList from "./CompaniesList";
 import SearchForm from "./SearchForm";
@@ -20,6 +20,24 @@ function CompaniesPage() {
     const [companies, setCompanies] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [searchFilter, setSearchFilter] = useState("");
+
+    const [queryParams, setQueryParams] = useSearchParams();
+    const [currPage, setCurrPage] = useState(Number(queryParams.get("page")));
+
+    const navigate = useNavigate();
+
+    function handlePageChange(newPageNum) {
+        setCurrPage(newPageNum);
+    }
+
+    useEffect(function updateQueryStringOnCurrPageChange() {
+        console.log(currPage);
+        if (!Number.isInteger(currPage)) {
+            console.log("Should be navigating soon");
+            navigate("/404");
+        }
+        setQueryParams(new URLSearchParams({ page: currPage }));
+    }, [currPage]);
 
     const { currUser } = useContext(UserContext);
     if (!currUser) {
@@ -46,12 +64,15 @@ function CompaniesPage() {
 
     function renderCompanies() {
         return (companies && companies.length > 0)
-            ? <CompaniesList companies={companies} />
+            ? <CompaniesList
+                companies={companies}
+                currPage={currPage}
+                handlePageChange={handlePageChange} />
             : <p className="mt-4 text-light">Sorry, no results were found!</p>;
     }
 
     return (
-        <div className="mt-5 col-12 col-md-10 offset-md-1" style={{ overflow: "clip" }}>
+        <div className="my-5 col-12 col-md-10 offset-md-1" style={{ overflow: "clip" }}>
             <SearchForm initialInput={searchFilter} search={search} />
             <div className="mt-5" style={{ color: "white" }}>
                 {searchFilter
