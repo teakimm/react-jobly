@@ -5,6 +5,7 @@ import RoutesList from './RoutesList';
 import NavBar from './NavBar';
 import JoblyApi from "../api";
 import { jwtDecode } from "jwt-decode";
+import useLocalStorage from "./useLocalStorage";
 
 /** Component for entire page.
  *
@@ -19,13 +20,13 @@ import { jwtDecode } from "jwt-decode";
 
 function App() {
   const [currUser, setCurrUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useLocalStorage("token");
   const [firstLoading, setFirstLoading] = useState(true);
 
   /** sets the token on mount and when the token changes. Decodes the token
    * and makes an api call with the token to receive user information
    */
-  function updateUserInfoOnTokenChange() {
+  useEffect(function updateUserInfoOnTokenChange() {
 
     async function updateUserInfo() {
       try {
@@ -36,19 +37,9 @@ function App() {
       }
       setFirstLoading(false);
     }
-
-    if (!token) {
-      localStorage.removeItem("token");
-    } else {
-      localStorage.setItem("token", token);
-    }
     JoblyApi.token = token;
-
     updateUserInfo();
-  }
-
-
-  useEffect(updateUserInfoOnTokenChange, [token]);
+  }, [token]);
 
   /** Takes in loginData like {username: ..., password: ...} and makes an api call
    * to receive a token. Sets that token in state.

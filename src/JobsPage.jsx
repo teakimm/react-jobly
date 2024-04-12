@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 import { Navigate, useSearchParams, useNavigate } from "react-router-dom";
-import JoblyApi from "../api";
 import JobsList from "./JobsList";
 import SearchForm from "./SearchForm";
 import UserContext from "./UserContext";
+import { useFetchJobs } from "./apiCustomHooks";
 
 /** smart component to render jobs
  *
@@ -17,13 +17,10 @@ import UserContext from "./UserContext";
  * RouteList -> JobsPage -> JobsList, SearchForm -> JobCard
  */
 function JobsPage() {
-    const [jobs, setJobs] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [searchFilter, setSearchFilter] = useState("");
+    const [jobs, isLoading, searchFilter, setSearchFilter] = useFetchJobs();
 
     const [queryParams, setQueryParams] = useSearchParams();
     const [currPage, setCurrPage] = useState(queryParams.get("page") ? Number(queryParams.get("page")) : 1);
-
 
     const navigate = useNavigate();
 
@@ -45,22 +42,10 @@ function JobsPage() {
         return <Navigate to="/" />;
     }
 
-    async function fetchJobs(searchParam = "") {
-        const jobResponse = await JoblyApi.getJobs(searchParam);
-        setJobs(jobResponse);
-        setIsLoading(false);
-    }
-
-    useEffect(function fetchJobsWhenMounted() {
-        fetchJobs();
-    }, []);
-
     /** Make api request with user input and updates state on api response. */
     function search(userInput) {
-        setIsLoading(true);
+        setCurrPage(1);
         setSearchFilter(userInput);
-        fetchJobs(userInput);
-        setIsLoading(false);
     }
 
     function renderJobs() {

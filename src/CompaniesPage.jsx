@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
-import JoblyApi from "../api";
 import CompaniesList from "./CompaniesList";
 import SearchForm from "./SearchForm";
 import UserContext from "./UserContext";
+import { useFetchCompanies } from "./apiCustomHooks";
 
 /** Smart component to render companies
  *
@@ -17,9 +17,7 @@ import UserContext from "./UserContext";
  * RouteList -> CompaniesPage -> CompaniesList , SearchForm -> CompanyCard
  */
 function CompaniesPage() {
-    const [companies, setCompanies] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [searchFilter, setSearchFilter] = useState("");
+    const [companies, isLoading, searchFilter, setSearchFilter] = useFetchCompanies();
 
     const [queryParams, setQueryParams] = useSearchParams();
     const [currPage, setCurrPage] = useState(queryParams.get("page") ? Number(queryParams.get("page")) : 1);
@@ -43,22 +41,9 @@ function CompaniesPage() {
         return <Navigate to="/" />;
     }
 
-    async function fetchCompanies(searchParam = "") {
-        const companiesResponse = await JoblyApi.getCompanies(searchParam);
-        setCompanies(companiesResponse);
-        setIsLoading(false);
-    }
-
-    useEffect(function fetchCompaniesWhenMounted() {
-        fetchCompanies();
-    }, []);
-
-    /** Make api request with user input and updates state on api response. */
     function search(userInput) {
-        setIsLoading(true);
+        setCurrPage(1);
         setSearchFilter(userInput);
-        fetchCompanies(userInput);
-        setIsLoading(false);
     }
 
     function renderCompanies() {
