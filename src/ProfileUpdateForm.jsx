@@ -79,7 +79,7 @@ function ProfileUpdateForm({ updateProfile }) {
                         <input className="form-control" name="email" id="email" onChange={handleChange} value={formData.email} type="email" />
                     </div>
 
-                    <button className="btn btn-secondary">Update</button>
+                    <button className="btn btn-secondary mt-3">Update</button>
 
                 </form>
                 {alertMessages && <Alert messages={alertMessages.messages} type={alertMessages.type} />}
