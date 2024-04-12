@@ -11,11 +11,16 @@ import { debounce } from "lodash";
 */
 function SearchForm({ initialInput = "", search }) {
     const [userInput, setUserInput] = useState(initialInput);
+    const [firstRender, setFirstRender] = useState(true);
 
     const debouncedSearch = useCallback(debounce(search, 200), []);
 
     useEffect(() => {
-        debouncedSearch(userInput.trim());
+        if (firstRender) {
+            setFirstRender(false);
+        } else {
+            debouncedSearch(userInput.trim());
+        }
     }, [userInput]);
 
     function handleChange(evt) {
