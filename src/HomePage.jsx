@@ -16,7 +16,7 @@ function HomePage() {
     return (
 
         <div className="col-12 d-flex align-items-center flex-column">
-            <img src="../public/joblyLogo.png" alt="logo" style={{ width: "30rem" }} />
+            <img src="/joblyLogo.png" alt="logo" style={{ width: "30rem" }} />
             <div className="mt-1" style={{ color: "white", textAlign: "center" }}>
                 <h1 className="mb-4">Jobs! Get your jobs here</h1>
                 {currUser
